@@ -162,6 +162,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.GlamourSpace.GlamourSpaceAR
+    Standalone: com.Glamour-Space.Glamour-Space-AR
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -846,7 +847,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 2
+  activeInputHandler: 1
   windowsGamepadBackendHint: 0
   cloudProjectId: 66ebc1aa-9824-47f2-a33a-aa195c5948cb
   framebufferDepthMemorylessMode: 0
