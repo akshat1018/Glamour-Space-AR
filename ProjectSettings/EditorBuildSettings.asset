@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene_1.unity
     guid: bda8d6b7da4f036488e33dadf1871d03
+  - enabled: 1
+    path: Assets/Scenes/WallCovering.unity
+    guid: 179e02eea5f99384bb03fb852f272cf8
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 706865b355732c74b9fa05dbe4518195, type: 2}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 1ec2a04c1efa8f548841122f0a390091, type: 2}
