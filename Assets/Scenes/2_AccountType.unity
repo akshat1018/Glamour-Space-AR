@@ -365,7 +365,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 16
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -766,7 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41320753, g: 0.99539775, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1092,9 +1092,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 807929649}
     m_Modifications:
+    - target: {fileID: 438921490821102790, guid: bf2e554b0d3098d498c1a24cd46837d9, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2354022332577624202, guid: bf2e554b0d3098d498c1a24cd46837d9, type: 3}
       propertyPath: m_Name
       value: Personal_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373691927991102869, guid: bf2e554b0d3098d498c1a24cd46837d9, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373691927991102869, guid: bf2e554b0d3098d498c1a24cd46837d9, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373691927991102869, guid: bf2e554b0d3098d498c1a24cd46837d9, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7745443077120666933, guid: bf2e554b0d3098d498c1a24cd46837d9, type: 3}
       propertyPath: m_Pivot.x
