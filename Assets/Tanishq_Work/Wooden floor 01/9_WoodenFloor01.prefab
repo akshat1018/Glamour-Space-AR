@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7606790127183592028}
   - component: {fileID: 1645877207624544820}
   m_Layer: 0
-  m_Name: WoodenFloor01
+  m_Name: 9_WoodenFloor01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
