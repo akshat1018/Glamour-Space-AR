@@ -34,22 +34,6 @@ public class FirebaseAuthManager : MonoBehaviour
     private IEnumerator CheckAndFixDependenciesAsync()
     {
         var dependencyTask = FirebaseApp.CheckAndFixDependenciesAsync();
-<<<<<<< Updated upstream
-        yield return new WaitUntil(()=> dependencyTask.IsCompleted);
-
-        dependencyStatus = dependencyTask.Result;
-
-            if (dependencyStatus == DependencyStatus.Available)
-            {
-                InitializeFirebase();
-                yield return new WaitForEndOfFrame();
-                StartCoroutine(CheckForAutoLogin());
-            }
-            else
-            {
-                Debug.LogError("Could not resolve all firebase dependencies: " + dependencyStatus);
-            }
-=======
         yield return new WaitUntil(() => dependencyTask.IsCompleted);
 
         dependencyStatus = dependencyTask.Result;
@@ -63,7 +47,6 @@ public class FirebaseAuthManager : MonoBehaviour
         {
             Debug.LogError("Could not resolve all firebase dependencies: " + dependencyStatus);
         }
->>>>>>> Stashed changes
     }
 
     void InitializeFirebase()
@@ -75,39 +58,6 @@ public class FirebaseAuthManager : MonoBehaviour
         AuthStateChanged(this, null);
     }
 
-<<<<<<< Updated upstream
-    private IEnumerator CheckForAutoLogin()
-    {
-        if(user != null)
-        {
-            var reloadUserTask = user.ReloadAsync();
-
-            yield return new WaitUntil(()=> reloadUserTask.IsCompleted);
-
-            AutoLogin();
-        }
-        else
-        {
-            UIManager.Instance.OpenLoginPanel();
-        }
-    }
-
-    private void AutoLogin()
-    {
-        if(user!= null)
-        {
-            References.userName = user.DisplayName;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("2_AccountType");
-        }
-        
-        else
-        {
-            UIManager.Instance.OpenLoginPanel();
-        }
-    }
-
-=======
->>>>>>> Stashed changes
     // Track state changes of the auth object.
     void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
@@ -179,13 +129,8 @@ public class FirebaseAuthManager : MonoBehaviour
 
             if(user.IsEmailVerified)
             {
-<<<<<<< Updated upstream
-            References.userName = user.DisplayName;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("2_AccountType");
-=======
                 References.userName = user.DisplayName;
                 UnityEngine.SceneManagement.SceneManager.LoadScene("2_AccountType");
->>>>>>> Stashed changes
             }
             else
             {
@@ -307,10 +252,6 @@ public class FirebaseAuthManager : MonoBehaviour
             }
         }
     }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     public void SendEmailForVerification()
     {
         StartCoroutine(SendEmailForVerificationAsync());
@@ -318,15 +259,6 @@ public class FirebaseAuthManager : MonoBehaviour
 
     private IEnumerator SendEmailForVerificationAsync()
     {
-<<<<<<< Updated upstream
-        if(user!=null)
-        {
-            var sendEmailTask = user.SendEmailVerificationAsync();
-
-            yield return new WaitUntil(()=> sendEmailTask.IsCompleted);
-
-            if(sendEmailTask.Exception !=null)
-=======
         if(user != null)
         {
             var sendEmailTask = user.SendEmailVerificationAsync();
@@ -334,7 +266,6 @@ public class FirebaseAuthManager : MonoBehaviour
             yield return new WaitUntil(() => sendEmailTask.IsCompleted);
 
             if (sendEmailTask.Exception != null)
->>>>>>> Stashed changes
             {
                 FirebaseException firebaseException = sendEmailTask.Exception.GetBaseException() as FirebaseException;
                 AuthError error = (AuthError)firebaseException.ErrorCode;
@@ -344,16 +275,6 @@ public class FirebaseAuthManager : MonoBehaviour
                 switch (error)
                 {
                     case AuthError.Cancelled:
-<<<<<<< Updated upstream
-                    errorMessage = "Email Verification is Cancelled";
-                    break;
-                    case AuthError.TooManyRequests:
-                    errorMessage = "Too Many Request";
-                    break;
-                    case AuthError.InvalidRecipientEmail:
-                    errorMessage = "Email is invalid";
-                    break;
-=======
                         errorMessage = "Email Verification is Cancelled";
                         break;
                     case AuthError.TooManyRequests:
@@ -362,26 +283,15 @@ public class FirebaseAuthManager : MonoBehaviour
                     case AuthError.InvalidRecipientEmail:
                         errorMessage = "Email is invalid";
                         break;
->>>>>>> Stashed changes
                 }
 
                 UIManager.Instance.ShowVerificationResponse(false, user.Email, errorMessage);
             }
             else
             {
-<<<<<<< Updated upstream
-                Debug.Log("Email has been sent sucessfully");
-                UIManager.Instance.ShowVerificationResponse(true,user.Email,null);
-
-            }
-        }
-    }
-}
-=======
                 Debug.Log("Email has been sent successfully");
                 UIManager.Instance.ShowVerificationResponse(true, user.Email, null);
             }
         }
     }
 }
->>>>>>> Stashed changes

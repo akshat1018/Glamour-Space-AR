@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "firebase_url":"null",
+    "project_number": "678192393542",
+    "project_id": "gspacear",
+    "storage_bucket": "gspacear.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678192393542:android:25da06c4cd9006b2144947",
+        "android_client_info": {
+          "package_name": "com.GlamourSpace.GlamourSpaceAR"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC71IJ68enjBNM4SIAn6x6YGg_Nrg83XdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
