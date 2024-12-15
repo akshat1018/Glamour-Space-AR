@@ -796,11 +796,15 @@ PrefabInstance:
     - target: {fileID: 7930211717049797332, guid: d5ca8ee4473411944b1162493398607e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 295035550}
+      objectReference: {fileID: 295035552}
     - target: {fileID: 7930211717049797332, guid: d5ca8ee4473411944b1162493398607e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SelectObjectToPlace
       objectReference: {fileID: 0}
+    - target: {fileID: 7930211717049797332, guid: d5ca8ee4473411944b1162493398607e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FloorMapping, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7931145675619118090, guid: d5ca8ee4473411944b1162493398607e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -849,6 +853,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8127163176423399282, guid: d5ca8ee4473411944b1162493398607e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dd57f5ada7da71147a461ff299373376, type: 3}
     - target: {fileID: 8145344739767482307, guid: d5ca8ee4473411944b1162493398607e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
