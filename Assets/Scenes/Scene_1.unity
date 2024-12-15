@@ -376,8 +376,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToPlace:
-  - {fileID: 4074668721533988770, guid: b8544162cbdd53d4ea7586e1b615609a, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 352782867132365605, guid: b8544162cbdd53d4ea7586e1b615609a, type: 3}
   objectCosts:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   - 100
   placementIndicator: {fileID: 8297056788253150765, guid: 98c57c60d5f37d34cb0d009317bd15af, type: 3}
   RaycastManager: {fileID: 295035551}
@@ -804,6 +822,10 @@ PrefabInstance:
     - target: {fileID: 7930211717049797332, guid: d5ca8ee4473411944b1162493398607e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FloorMapping, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7930211717049797332, guid: d5ca8ee4473411944b1162493398607e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7931145675619118090, guid: d5ca8ee4473411944b1162493398607e, type: 3}
       propertyPath: m_AnchorMax.y
