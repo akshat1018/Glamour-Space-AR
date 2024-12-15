@@ -34,19 +34,20 @@ public class FirebaseAuthManager : MonoBehaviour
     private IEnumerator CheckAndFixDependenciesAsync()
     {
         var dependencyTask = FirebaseApp.CheckAndFixDependenciesAsync();
-        yield return new WaitUntil(() => dependencyTask.IsCompleted);
+        yield return new WaitUntil(()=> dependencyTask.IsCompleted);
 
         dependencyStatus = dependencyTask.Result;
 
-        if (dependencyStatus == DependencyStatus.Available)
-        {
-            InitializeFirebase();
-            yield return new WaitForEndOfFrame();
-        }
-        else
-        {
-            Debug.LogError("Could not resolve all firebase dependencies: " + dependencyStatus);
-        }
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                InitializeFirebase();
+                yield return new WaitForEndOfFrame();
+                StartCoroutine(CheckForAutoLogin());
+            }
+            else
+            {
+                Debug.LogError("Could not resolve all firebase dependencies: " + dependencyStatus);
+            }
     }
 
     void InitializeFirebase()
@@ -56,6 +57,36 @@ public class FirebaseAuthManager : MonoBehaviour
 
         auth.StateChanged += AuthStateChanged;
         AuthStateChanged(this, null);
+    }
+
+    private IEnumerator CheckForAutoLogin()
+    {
+        if(user != null)
+        {
+            var reloadUserTask = user.ReloadAsync();
+
+            yield return new WaitUntil(()=> reloadUserTask.IsCompleted);
+
+            AutoLogin();
+        }
+        else
+        {
+            UIManager.Instance.OpenLoginPanel();
+        }
+    }
+
+    private void AutoLogin()
+    {
+        if(user!= null)
+        {
+            References.userName = user.DisplayName;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("2_AccountType");
+        }
+        
+        else
+        {
+            UIManager.Instance.OpenLoginPanel();
+        }
     }
 
     // Track state changes of the auth object.
@@ -129,8 +160,8 @@ public class FirebaseAuthManager : MonoBehaviour
 
             if(user.IsEmailVerified)
             {
-                References.userName = user.DisplayName;
-                UnityEngine.SceneManagement.SceneManager.LoadScene("2_AccountType");
+            References.userName = user.DisplayName;
+            UnityEngine.SceneManagement.SceneManager.LoadScene("2_AccountType");
             }
             else
             {
@@ -259,13 +290,13 @@ public class FirebaseAuthManager : MonoBehaviour
 
     private IEnumerator SendEmailForVerificationAsync()
     {
-        if(user != null)
+        if(user!=null)
         {
             var sendEmailTask = user.SendEmailVerificationAsync();
 
-            yield return new WaitUntil(() => sendEmailTask.IsCompleted);
+            yield return new WaitUntil(()=> sendEmailTask.IsCompleted);
 
-            if (sendEmailTask.Exception != null)
+            if(sendEmailTask.Exception !=null)
             {
                 FirebaseException firebaseException = sendEmailTask.Exception.GetBaseException() as FirebaseException;
                 AuthError error = (AuthError)firebaseException.ErrorCode;
@@ -275,22 +306,23 @@ public class FirebaseAuthManager : MonoBehaviour
                 switch (error)
                 {
                     case AuthError.Cancelled:
-                        errorMessage = "Email Verification is Cancelled";
-                        break;
+                    errorMessage = "Email Verification is Cancelled";
+                    break;
                     case AuthError.TooManyRequests:
-                        errorMessage = "Too Many Request";
-                        break;
+                    errorMessage = "Too Many Request";
+                    break;
                     case AuthError.InvalidRecipientEmail:
-                        errorMessage = "Email is invalid";
-                        break;
+                    errorMessage = "Email is invalid";
+                    break;
                 }
 
                 UIManager.Instance.ShowVerificationResponse(false, user.Email, errorMessage);
             }
             else
             {
-                Debug.Log("Email has been sent successfully");
-                UIManager.Instance.ShowVerificationResponse(true, user.Email, null);
+                Debug.Log("Email has been sent sucessfully");
+                UIManager.Instance.ShowVerificationResponse(true,user.Email,null);
+
             }
         }
     }
