@@ -989,6 +989,7 @@ GameObject:
   - component: {fileID: 707343862}
   - component: {fileID: 707343861}
   - component: {fileID: 707343860}
+  - component: {fileID: 707343864}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1079,6 +1080,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &707343864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707343859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5397067aa4d6841b16a4847ffa25a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  redirectDropdown: {fileID: 2099918358}
 --- !u!1 &774268843
 GameObject:
   m_ObjectHideFlags: 0
@@ -2498,6 +2512,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042220140}
   m_CullTransparentMesh: 1
+--- !u!114 &2099918358 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2658299487747742250, guid: 10005dffbc2e3d744ad6dd4460536f1f, type: 3}
+  m_PrefabInstance: {fileID: 5053299668254613434}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2129301370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2737,9 +2762,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 666745301}
     m_Modifications:
+    - target: {fileID: 2658299487747742250, guid: 10005dffbc2e3d744ad6dd4460536f1f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658299487747742250, guid: 10005dffbc2e3d744ad6dd4460536f1f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2658299487747742250, guid: 10005dffbc2e3d744ad6dd4460536f1f, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6068649656886853936, guid: 10005dffbc2e3d744ad6dd4460536f1f, type: 3}
       propertyPath: m_Name
       value: 'Inventory_Dropdown '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7411093406894638687, guid: 10005dffbc2e3d744ad6dd4460536f1f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8683504725881165487, guid: 10005dffbc2e3d744ad6dd4460536f1f, type: 3}
       propertyPath: m_Pivot.x
@@ -2819,6 +2860,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8683504725881165487, guid: 10005dffbc2e3d744ad6dd4460536f1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8844377436678450027, guid: 10005dffbc2e3d744ad6dd4460536f1f, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
