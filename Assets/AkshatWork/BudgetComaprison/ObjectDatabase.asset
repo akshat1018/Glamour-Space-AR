@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e566ba3699d4b364d99531a0a911f0a6, type: 3}
+  m_Name: ObjectDatabase
+  m_EditorClassIdentifier: 
+  objectsList:
+  - objectName: Wooden Chair
+    category: Chair
+    price: 2500
+    image: {fileID: 21300000, guid: f1194ede22c319243b4faf9d5d1d4a8d, type: 3}
+  - objectName: Wooden Bed
+    category: Bed
+    price: 10000
+    image: {fileID: 21300000, guid: cddd1d0a7c8b29d418de2e0d5befa4ae, type: 3}
+  - objectName: Glass Table
+    category: Table
+    price: 3000
+    image: {fileID: 21300000, guid: 91ab74130283f964dbfddfc7aeb87e9b, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
+  - objectName: Sofa Set
+    category: Sofa
+    price: 5000
+    image: {fileID: 21300000, guid: b5fb15c7e2b1d134e876dd3b50a2b915, type: 3}
