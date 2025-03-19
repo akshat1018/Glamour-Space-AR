@@ -11,14 +11,30 @@ public class BudgetUIManager : MonoBehaviour
     public Transform resultsContent;     // Parent for displaying results
     public GameObject resultTemplate;    // Template for displaying an object
 
+    public Button findButton;
+
     private void Start()
     {
+        if (objectDatabase == null)
+        {
+            Debug.LogError("ObjectDatabase is not assigned in the Inspector!");
+            return;
+        }
+
         PopulateDropdown();
+
+        findButton.onClick.AddListener(OnFindBestOptions);
     }
 
     // Populate Dropdown with unique categories
     void PopulateDropdown()
     {
+        if (categoryDropdown == null || objectDatabase == null)
+        {
+            Debug.LogError("CategoryDropdown or ObjectDatabase is not assigned!");
+            return;
+        }
+
         categoryDropdown.ClearOptions();
         List<string> categories = new List<string> { "All" };
 
@@ -33,39 +49,53 @@ public class BudgetUIManager : MonoBehaviour
 
     // Function triggered on "Find Best Option" button click
     public void OnFindBestOptions()
-{
-    Debug.Log("Find Best Option Button Clicked");
-
-    float budget;
-    if (!float.TryParse(budgetInput.text, out budget))
     {
-        Debug.LogError("Invalid budget entered!");
-        return;
+        if (objectDatabase == null)
+        {
+            Debug.LogError("ObjectDatabase is not assigned!");
+            return;
+        }
+
+        Debug.Log("Find Best Option Button Clicked");
+
+        float budget;
+        if (!float.TryParse(budgetInput.text, out budget))
+        {
+            Debug.LogError("Invalid budget entered!");
+            return;
+        }
+
+        Debug.Log("Entered Budget: " + budget);
+
+        string selectedCategory = categoryDropdown.options[categoryDropdown.value].text;
+        Debug.Log("Selected Category: " + selectedCategory);
+
+        List<ObjectData> filteredObjects = objectDatabase.objectsList.FindAll(obj =>
+            obj.price <= budget &&
+            (selectedCategory == "All" || obj.category == selectedCategory));
+
+        Debug.Log("Filtered Objects Count: " + filteredObjects.Count);
+
+        DisplayResults(filteredObjects);
     }
-
-    Debug.Log("Entered Budget: " + budget);
-
-    string selectedCategory = categoryDropdown.options[categoryDropdown.value].text;
-    Debug.Log("Selected Category: " + selectedCategory);
-
-    List<ObjectData> filteredObjects = objectDatabase.objectsList.FindAll(obj =>
-        obj.price <= budget &&
-        (selectedCategory == "All" || obj.category == selectedCategory));
-
-    Debug.Log("Filtered Objects Count: " + filteredObjects.Count);
-
-    DisplayResults(filteredObjects);
-}
-
 
     // Display the filtered objects
     void DisplayResults(List<ObjectData> filteredObjects)
 {
-    // Clear previous results
-    foreach (Transform child in resultsContent)
+    if (resultsContent == null)
     {
-        Destroy(child.gameObject);
+        Debug.LogError("ResultsContent is not assigned in the Inspector!");
+        return;
     }
+
+    if (resultTemplate == null)
+    {
+        Debug.LogError("ResultTemplate is not assigned in the Inspector!");
+        return;
+    }
+
+    // Clear previous results
+    ClearResults();
 
     Debug.Log("Displaying " + filteredObjects.Count + " objects in UI...");
 
@@ -82,38 +112,76 @@ public class BudgetUIManager : MonoBehaviour
         newResult.transform.SetParent(resultsContent, false); // Fix UI scaling
         newResult.SetActive(true); // Ensure template is visible
 
+        // Safeguard: Ensure the instance is not null
+        if (newResult == null)
+        {
+            Debug.LogError("Failed to instantiate result template!");
+            continue;
+        }
+
         // 🔥 Fix: Ensure Image and Text are also enabled
-        newResult.transform.Find("ResultImage").gameObject.SetActive(true);
-        newResult.transform.Find("ResultText").gameObject.SetActive(true);
+        Transform resultImage = newResult.transform.Find("ResultImage");
+        Transform resultText = newResult.transform.Find("ResultText");
 
-        Debug.Log("Created UI for: " + obj.objectName);
-
-        // Set Image
-        Image imageComponent = newResult.transform.Find("ResultImage").GetComponent<Image>();
-        if (imageComponent != null && obj.image != null)
+        if (resultImage != null)
         {
-            imageComponent.sprite = obj.image;
-            imageComponent.enabled = true; // ✅ Ensure the Image component is enabled
+            resultImage.gameObject.SetActive(true);
+            Image imageComponent = resultImage.GetComponent<Image>();
+            if (imageComponent != null && obj.image != null)
+            {
+                imageComponent.sprite = obj.image;
+                imageComponent.enabled = true; // ✅ Ensure the Image component is enabled
+            }
+            else
+            {
+                Debug.LogError("Missing Image for: " + obj.objectName);
+            }
         }
         else
         {
-            Debug.LogError("Missing Image for: " + obj.objectName);
+            Debug.LogError("ResultImage not found in the template!");
         }
 
-        // Set Text
-        TextMeshProUGUI textComponent = newResult.transform.Find("ResultText").GetComponent<TextMeshProUGUI>();
-        if (textComponent != null)
+        if (resultText != null)
         {
-            textComponent.text = $"{obj.objectName} - ₹{obj.price}";
-            textComponent.enabled = true; // ✅ Ensure the Text component is enabled
+            resultText.gameObject.SetActive(true);
+            TextMeshProUGUI textComponent = resultText.GetComponent<TextMeshProUGUI>();
+            if (textComponent != null)
+            {
+                textComponent.text = $"{obj.objectName} - ₹{obj.price}";
+                textComponent.enabled = true; // ✅ Ensure the Text component is enabled
+            }
+            else
+            {
+                Debug.LogError("Missing Text Component for: " + obj.objectName);
+            }
         }
         else
         {
-            Debug.LogError("Missing Text Component for: " + obj.objectName);
+            Debug.LogError("ResultText not found in the template!");
         }
     }
 }
 
+    // Clear all results from the resultsContent
+    public void ClearResults()
+    {
+        if (resultsContent == null)
+        {
+            Debug.LogError("ResultsContent is not assigned!");
+            return;
+        }
 
+        // Destroy all child objects in resultsContent
+        foreach (Transform child in resultsContent)
+        {
+            Destroy(child.gameObject);
+        }
 
+        Debug.Log("✅ Results cleared.");
+
+        
+    }
+
+    
 }
