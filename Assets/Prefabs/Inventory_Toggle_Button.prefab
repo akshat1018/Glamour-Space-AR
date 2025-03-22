@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7773426421932252537}
   m_Layer: 5
   m_Name: Request_Models_Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,7 +252,7 @@ GameObject:
   - component: {fileID: 1352486540671893744}
   m_Layer: 5
   m_Name: Import_Models_Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 9216440542352926190}
   m_Layer: 5
   m_Name: Inventory_Toggle_Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 7306878245398984286}
   m_Layer: 5
   m_Name: MyModels_Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -719,8 +719,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: My Models
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f81f7e2b2cf1b6f4f894f083e4de9522, type: 2}
-  m_sharedMaterial: {fileID: -5895474464314925905, guid: f81f7e2b2cf1b6f4f894f083e4de9522, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eab0aef1d1c9b19488f9f44094978d83, type: 2}
+  m_sharedMaterial: {fileID: -5136905143405147018, guid: eab0aef1d1c9b19488f9f44094978d83, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -750,11 +750,11 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 32
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 13.73
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -853,8 +853,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Request Models
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f81f7e2b2cf1b6f4f894f083e4de9522, type: 2}
-  m_sharedMaterial: {fileID: -5895474464314925905, guid: f81f7e2b2cf1b6f4f894f083e4de9522, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eab0aef1d1c9b19488f9f44094978d83, type: 2}
+  m_sharedMaterial: {fileID: -5136905143405147018, guid: eab0aef1d1c9b19488f9f44094978d83, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -884,11 +884,11 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 32
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 13.73
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -987,8 +987,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Import Models
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f81f7e2b2cf1b6f4f894f083e4de9522, type: 2}
-  m_sharedMaterial: {fileID: -5895474464314925905, guid: f81f7e2b2cf1b6f4f894f083e4de9522, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: eab0aef1d1c9b19488f9f44094978d83, type: 2}
+  m_sharedMaterial: {fileID: -5136905143405147018, guid: eab0aef1d1c9b19488f9f44094978d83, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1018,11 +1018,11 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 32
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 13.73
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

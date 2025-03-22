@@ -80,7 +80,7 @@ public class FirebaseAuthManager : MonoBehaviour
         if(user!= null)
         {
             References.userName = user.DisplayName;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("2_AccountType");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("3_Main Menu");
         }
         
         else
@@ -161,7 +161,7 @@ public class FirebaseAuthManager : MonoBehaviour
             if(user.IsEmailVerified)
             {
             References.userName = user.DisplayName;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("2_AccountType");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("3_Main Menu");
             }
             else
             {

@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 7627561901610279033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1369363709206801668}
@@ -90,11 +90,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 855872243250120339, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 68024.15
+      value: 73210.61
       objectReference: {fileID: 0}
     - target: {fileID: 2630400566453868850, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_Name
       value: ConpareUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4031312237384349196, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218119876143454118, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_TagString
+      value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251965762938450246, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_TagString
+      value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583277140191360554, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602962657393785938, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 4604279761762847763, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -187,6 +207,26 @@ PrefabInstance:
     - target: {fileID: 5678932903341375448, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090847632215641400, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7265127929215832300, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6e9f5e569f8c22f499d8b7f61b4ea42d, type: 3}
+    - target: {fileID: 7736694744830850713, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7906627736452939802, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_Size
+      value: 0.80222225
+      objectReference: {fileID: 0}
+    - target: {fileID: 7906627736452939802, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

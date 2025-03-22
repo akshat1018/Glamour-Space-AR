@@ -16,30 +16,24 @@ public class ButtonClickSound : MonoBehaviour
         }
 
         // Set the AudioSource settings
-        audioSource.playOnAwake = false; // Prevent sound from playing on start
+        audioSource.playOnAwake = false;
         audioSource.clip = clickSound;
 
-        // Find all GameObjects tagged as "Button"
-        GameObject[] buttonObjects = GameObject.FindGameObjectsWithTag("Button");
-        foreach (GameObject buttonObject in buttonObjects)
+        // Automatically assign the PlayClickSound function to all buttons in the scene
+        Button[] buttons = FindObjectsOfType<Button>();
+        foreach (Button button in buttons)
         {
-            Button buttonComponent = buttonObject.GetComponent<Button>();
-            if (buttonComponent != null)
-            {
-                buttonComponent.onClick.AddListener(PlayClickSound);
-            }
-            else
-            {
-                Debug.LogWarning($"GameObject '{buttonObject.name}' tagged as 'Button' does not have a Button component.");
-            }
+            button.onClick.AddListener(PlayClickSound);
         }
     }
 
-    private void PlayClickSound()
+    // Public function to play the click sound
+    public void PlayClickSound()
     {
         if (clickSound != null)
         {
-            audioSource.Play();
+            audioSource.PlayOneShot(clickSound);
+            Debug.Log("Sound Played: " + clickSound.name);
         }
         else
         {

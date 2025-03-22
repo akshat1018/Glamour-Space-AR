@@ -48,37 +48,37 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Ambient: 0.257
-    - _Bevel: 0.5
-    - _BevelClamp: 0
-    - _BevelOffset: 0
-    - _BevelRoundness: 0
+    - _Ambient: 0
+    - _Bevel: 1
+    - _BevelClamp: 1
+    - _BevelOffset: 0.5
+    - _BevelRoundness: 1
     - _BevelWidth: 0.5
     - _BumpFace: 0
     - _BumpOutline: 0
     - _ColorMask: 15
     - _CullMode: 0
-    - _Diffuse: 0.728
-    - _FaceDilate: -0.27
+    - _Diffuse: 1
+    - _FaceDilate: -0.36
     - _FaceUVSpeedX: 0
     - _FaceUVSpeedY: 0
-    - _GlowInner: 1
+    - _GlowInner: 0.289
     - _GlowOffset: -0.11
-    - _GlowOuter: 0.306
+    - _GlowOuter: 0.863
     - _GlowPower: 0.75
     - _GradientScale: 6
     - _LightAngle: 5.29
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
-    - _OutlineSoftness: 1
+    - _OutlineSoftness: 0.058
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
     - _OutlineWidth: 1
     - _PerspectiveFilter: 0.875
-    - _Reflectivity: 6.78
-    - _ScaleRatioA: 0.43459365
-    - _ScaleRatioB: 0.90208334
-    - _ScaleRatioC: 0.36083332
+    - _Reflectivity: 11
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.9770834
+    - _ScaleRatioC: 0.39083335
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -103,12 +103,12 @@ Material:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _EnvMatrixRotation: {r: 0, g: 0, b: 0, a: 0}
     - _FaceColor: {r: 1, g: 0.6582563, b: 0, a: 1}
-    - _GlowColor: {r: 0, g: 0, b: 0, a: 0.5}
+    - _GlowColor: {r: 0.64164954, g: 1.250562, b: 1.167874, a: 0.5}
     - _MaskCoord: {r: 0, g: 0, b: 32767, a: 32767}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0.38461542, b: 1, a: 1}
     - _ReflectFaceColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectOutlineColor: {r: 0, g: 0.48911357, b: 1, a: 1}
-    - _SpecularColor: {r: 0, g: 0.16604376, b: 1, a: 1}
+    - _SpecularColor: {r: 0, g: 0.21811819, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
 --- !u!114 &11400000

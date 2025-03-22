@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4089412479553457542
+--- !u!1 &977535468716060696
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6567410287999849421}
-  - component: {fileID: 4796775208185060618}
+  - component: {fileID: 2284149359194036818}
+  - component: {fileID: 725826485177003197}
   m_Layer: 0
-  m_Name: GameManager 1
+  m_Name: tldropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6567410287999849421
+--- !u!4 &2284149359194036818
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4089412479553457542}
+  m_GameObject: {fileID: 977535468716060696}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 335.02127, y: 1402.9457, z: 59.13069}
+  m_LocalPosition: {x: 484.13367, y: 1874.421, z: -9.727872}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4796775208185060618
+--- !u!114 &725826485177003197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4089412479553457542}
+  m_GameObject: {fileID: 977535468716060696}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 365d905aae314164bbd25997779b1ed1, type: 3}
+  m_Script: {fileID: 11500000, guid: 618b82d3decd3964ba73282645a513f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectDatabase: {fileID: 11400000, guid: b10ccfe0c969ef04892c1a215ac8cab3, type: 2}
-  budgetInput: {fileID: 0}
-  categoryDropdown: {fileID: 0}
-  resultsContent: {fileID: 0}
-  resultTemplate: {fileID: 69019658166356410, guid: 5ca4a4027d424b3419a44a4c56664b86, type: 3}
-  findButton: {fileID: 0}
+  budgetUI: {fileID: 0}
+  toggleButton: {fileID: 0}
+  backButton: {fileID: 0}
+  budgetUIManager: {fileID: 0}
