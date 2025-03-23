@@ -8,18 +8,15 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems; // For UI touch checking
 using TMPro;
 
-
 public class PlaceOnPlane : MonoBehaviour
 {
-    public GameObject[] objectsToPlace; // Array to hold the objects to place
-    public float[] objectCosts; // Array to hold the cost of each object
+    public ObjectDatabase objectDatabase; // Reference to the ObjectDatabase scriptable object
     private GameObject MyObject; // The currently selected object
     public GameObject placementIndicator;
     public ARRaycastManager RaycastManager;
     public float scaleDuration = 1.0f;
     public Vector3 initialScale = Vector3.zero;
     public Vector3 finalScale = Vector3.one;
-    
 
     public Button moveButton; // Reference to the TMP Button for toggling drag
     public Button deleteButton; // Reference to the button for deleting the selected object
@@ -41,7 +38,6 @@ public class PlaceOnPlane : MonoBehaviour
     private bool isDraggingEnabled = false; // Dragging enabled/disabled state
     private bool isDragging = false; // Dragging state
     private GameObject selectedPlacedObject; // Object being dragged
-   
 
     void Start()
     {
@@ -61,7 +57,6 @@ public class PlaceOnPlane : MonoBehaviour
             deleteButton.onClick.AddListener(DeleteSelectedObject); // Assign the delete functionality to the button
         }
         UpdateCostUI();
-
     }
 
     void Update()
@@ -87,12 +82,11 @@ public class PlaceOnPlane : MonoBehaviour
             placedObjects.Add(placedObject); // Store placed object in the list
 
             // Add the cost of the placed object
-            float objectCost = objectCosts[System.Array.IndexOf(objectsToPlace, MyObject)];
+            float objectCost = GetObjectCost(MyObject);
             objectCostMap.Add(placedObject, objectCost);
             totalCost += objectCost;
             UpdateCostUI();
 
-            
             canPlaceObject = false; // Disable further placement of the same object
         }
 
@@ -114,6 +108,7 @@ public class PlaceOnPlane : MonoBehaviour
             DragObject();
         }
     }
+
     private void UpdateCostUI()
     {
         costText.text = "Total Cost: \nRs " + totalCost.ToString("F2"); // Update the TMPro UI text
@@ -276,14 +271,26 @@ public class PlaceOnPlane : MonoBehaviour
         }
     }
 
-
     // Called when a new object is selected from the UI
     public void SelectObjectToPlace(int objectIndex)
     {
-        if (objectIndex >= 0 && objectIndex < objectsToPlace.Length)
+        if (objectIndex >= 0 && objectIndex < objectDatabase.objectsList.Count)
         {
-            MyObject = objectsToPlace[objectIndex];
+            MyObject = objectDatabase.objectsList[objectIndex].objectToPlace;
             canPlaceObject = true; // Allow placing the newly selected object
         }
+    }
+
+    // Helper method to get the cost of an object from the ObjectDatabase
+    private float GetObjectCost(GameObject objectToPlace)
+    {
+        foreach (var objectData in objectDatabase.objectsList)
+        {
+            if (objectData.objectToPlace == objectToPlace)
+            {
+                return objectData.price;
+            }
+        }
+        return 0; // Default cost if not found
     }
 }

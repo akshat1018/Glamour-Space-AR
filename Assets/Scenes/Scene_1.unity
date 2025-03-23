@@ -201,32 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7289e7805032cdf478344ea9bb837feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsToPlace:
-  - {fileID: 5274265622294406724, guid: cdec4e033db4fd04eb1a67864d0407b6, type: 3}
-  - {fileID: 3762300787162620202, guid: cb53ba5066b2d9048bbcd01745763998, type: 3}
-  - {fileID: 2606406848853835271, guid: dc1f2bc048dadeb478693b30c01a9ce8, type: 3}
-  - {fileID: 2290429128980147679, guid: 35a69f8bd3082ca47bb8aa0d0a31f444, type: 3}
-  - {fileID: 8453616881393536772, guid: 271e50312658545439247ef4bba55365, type: 3}
-  - {fileID: 4860335814140734793, guid: 550b0e691f0d9db4b8e5e78889d1fa6e, type: 3}
-  - {fileID: 1480204124709765691, guid: 8a1dee5a63a665a43acbd66d77801364, type: 3}
-  - {fileID: 3271191973734900374, guid: 66c5af89229203a458702a342ee6e95c, type: 3}
-  - {fileID: 8986767993454023442, guid: 7378e5d7963bfb145af9fc778f74745c, type: 3}
-  - {fileID: 352782867132365605, guid: b8544162cbdd53d4ea7586e1b615609a, type: 3}
-  - {fileID: 6688323184569394684, guid: e162c49dd9d0cf54aadccad857f4287a, type: 3}
-  - {fileID: 6508772507922776697, guid: 8d8f135d3b82f7348bd59340eaa17c84, type: 3}
-  objectCosts:
-  - 7000
-  - 23000
-  - 20000
-  - 20000
-  - 3000
-  - 2000
-  - 1200
-  - 600
-  - 45000
-  - 100
-  - 150
-  - 250
+  objectDatabase: {fileID: 11400000, guid: b10ccfe0c969ef04892c1a215ac8cab3, type: 2}
   placementIndicator: {fileID: 8297056788253150765, guid: 98c57c60d5f37d34cb0d009317bd15af, type: 3}
   RaycastManager: {fileID: 295035551}
   scaleDuration: 1
@@ -1421,7 +1396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6210394821483287631, guid: f59bd566ad9a1c94ba421eb15fc91e49, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 111923.06
+      value: 126598.88
       objectReference: {fileID: 0}
     - target: {fileID: 7073706298893704911, guid: f59bd566ad9a1c94ba421eb15fc91e49, type: 3}
       propertyPath: m_AnchorMax.x
