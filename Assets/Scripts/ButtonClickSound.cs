@@ -21,11 +21,13 @@ public class ButtonClickSound : MonoBehaviour
 
         // Automatically assign the PlayClickSound function to all buttons in the scene
         Button[] buttons = FindObjectsOfType<Button>();
+ 
         foreach (Button button in buttons)
         {
             button.onClick.AddListener(PlayClickSound);
         }
     }
+
 
     // Public function to play the click sound
     public void PlayClickSound()
