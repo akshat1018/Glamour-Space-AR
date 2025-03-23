@@ -571,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6210394821483287631, guid: f59bd566ad9a1c94ba421eb15fc91e49, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 293614.6
+      value: 74678.63
       objectReference: {fileID: 0}
     - target: {fileID: 7073706298893704911, guid: f59bd566ad9a1c94ba421eb15fc91e49, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2612,19 +2612,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1695653787}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 355696062}
-        m_TargetAssemblyTypeName: SceneSwitcher, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: WallCovering
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1695653787
 MonoBehaviour:
   m_ObjectHideFlags: 0
