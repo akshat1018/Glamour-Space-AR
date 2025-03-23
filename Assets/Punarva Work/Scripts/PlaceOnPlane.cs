@@ -11,6 +11,9 @@ using TMPro;
 public class PlaceOnPlane : MonoBehaviour
 {
     public ObjectDatabase objectDatabase; // Reference to the ObjectDatabase scriptable object
+    public GameObject contentUIPrefab; // Prefab for the button UI element
+    public Transform scrollbarContent; // Parent transform for the buttons (Scrollbar Content)
+
     private GameObject MyObject; // The currently selected object
     public GameObject placementIndicator;
     public ARRaycastManager RaycastManager;
@@ -38,6 +41,11 @@ public class PlaceOnPlane : MonoBehaviour
     private bool isDraggingEnabled = false; // Dragging enabled/disabled state
     private bool isDragging = false; // Dragging state
     private GameObject selectedPlacedObject; // Object being dragged
+
+    private void Awake()
+    {
+        PopulateScrollbarContent(); // Populate the scrollbar content with buttons
+    }
 
     void Start()
     {
@@ -106,6 +114,35 @@ public class PlaceOnPlane : MonoBehaviour
         if (isDraggingEnabled && isDragging)
         {
             DragObject();
+        }
+    }
+
+    // Populate the scrollbar content with buttons for each object in the ObjectDatabase
+    private void PopulateScrollbarContent()
+    {
+        if (contentUIPrefab == null || scrollbarContent == null || objectDatabase == null)
+        {
+            Debug.LogError("Button prefab, scrollbar content, or object database is not assigned.");
+            return;
+        }
+
+        for (int i = 0; i < objectDatabase.objectsList.Count; i++)
+        {
+            // Instantiate the button prefab
+            GameObject buttonObject = Instantiate(contentUIPrefab, scrollbarContent);
+            Button button = buttonObject.GetComponent<Button>();
+            Image buttonImage = buttonObject.GetComponent<Image>();
+            ObjectData objectData = objectDatabase.objectsList[i];
+
+            // Set the button image
+            if (buttonImage != null && objectData.image != null)
+            {
+                buttonImage.sprite = objectData.image;
+            }
+
+            // Assign the SelectObjectToPlace method to the button's onClick event
+            int objectIndex = i; // Capture the index for the lambda
+            button.onClick.AddListener(() => SelectObjectToPlace(objectIndex));
         }
     }
 
