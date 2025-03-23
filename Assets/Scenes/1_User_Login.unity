@@ -2554,7 +2554,7 @@ GameObject:
   - component: {fileID: 700017467}
   m_Layer: 5
   m_Name: Alduser
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2703,7 +2703,7 @@ GameObject:
   - component: {fileID: 819911390}
   m_Layer: 5
   m_Name: Register_Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3794,7 +3794,7 @@ GameObject:
   - component: {fileID: 1025302495}
   m_Layer: 5
   m_Name: Login_Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5914,7 +5914,7 @@ GameObject:
   - component: {fileID: 1668292370}
   m_Layer: 5
   m_Name: Login_Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7154,7 +7154,7 @@ GameObject:
   - component: {fileID: 2028494677}
   m_Layer: 5
   m_Name: NewUser
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
