@@ -40,18 +40,8 @@ public class ARModeToggler : MonoBehaviour
         objectPlacementUI.SetActive(!measurementModeActive);
 
         // Toggle AR components
-        measurementTool.enabled = measurementModeActive;
-        placeOnPlane.enabled = !measurementModeActive;
-
-        // Clean up states when switching
-        if (measurementModeActive)
-        {
-            //placeOnPlane.DeselectObject(); // Clear any selected placement objects
-        }
-        else
-        {
-            measurementTool.ResetMeasurement(); // Clear measurements
-        }
+        measurementTool.SetMeasurementMode(measurementModeActive);
+        placeOnPlane.SetPlacementMode(!measurementModeActive);
 
         UpdateButtonVisuals();
     }
@@ -61,10 +51,9 @@ public class ARModeToggler : MonoBehaviour
         var text = toggleButton.GetComponentInChildren<TMPro.TextMeshProUGUI>();
         if (text != null)
         {
-            text.text = isMeasurementMode ? "Placement Mode" : "Measurement Mode";
+            text.text = isMeasurementMode ? "Switch to Placement" : "Switch to Measurement";
         }
 
-        // Visual feedback
         var colors = toggleButton.colors;
         colors.normalColor = isMeasurementMode ? new Color(0.2f, 0.8f, 0.2f) : new Color(0.8f, 0.2f, 0.2f);
         toggleButton.colors = colors;

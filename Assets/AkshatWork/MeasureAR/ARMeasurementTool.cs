@@ -34,6 +34,7 @@ public class ARMeasurementTool : MonoBehaviour
     private const float OverlapThreshold = 0.05f;
     private MeasurementUnit currentUnit = MeasurementUnit.Centimeters;
     private DisplayMode currentDisplayMode = DisplayMode.Area;
+    private bool isMeasurementModeActive = true;
 
     // Input System
     private InputAction tapAction;
@@ -62,6 +63,24 @@ public class ARMeasurementTool : MonoBehaviour
     private void Start()
     {
         InitializeMeasurementSystem();
+    }
+
+    public void SetMeasurementMode(bool active)
+    {
+        isMeasurementModeActive = active;
+
+        if (!active)
+        {
+            ResetMeasurement();
+            if (currentTracker != null)
+            {
+                currentTracker.SetActive(false);
+            }
+        }
+        else if (currentTracker != null)
+        {
+            currentTracker.SetActive(true);
+        }
     }
 
     private void InitializeMeasurementSystem()
@@ -129,7 +148,7 @@ public class ARMeasurementTool : MonoBehaviour
         if (args.added.Count > 0 && currentTracker == null)
         {
             currentTracker = Instantiate(visualTrackerPrefab);
-            currentTracker.SetActive(false);
+            currentTracker.SetActive(isMeasurementModeActive);
         }
     }
 
@@ -141,7 +160,7 @@ public class ARMeasurementTool : MonoBehaviour
 
     private void UpdateTrackerPosition()
     {
-        if (currentTracker == null) return;
+        if (!isMeasurementModeActive || currentTracker == null) return;
 
         Vector2 screenCenter = new Vector2(Screen.width / 2, Screen.height / 2);
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
@@ -160,7 +179,7 @@ public class ARMeasurementTool : MonoBehaviour
 
     private void OnTap()
     {
-        if (!isInitialized || currentTracker == null || !currentTracker.activeSelf)
+        if (!isInitialized || !isMeasurementModeActive || currentTracker == null || !currentTracker.activeSelf)
             return;
 
         if (IsPointerOverUI())

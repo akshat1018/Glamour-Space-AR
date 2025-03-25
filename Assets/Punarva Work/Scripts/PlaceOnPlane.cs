@@ -5,30 +5,28 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; // For UI touch checking
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class PlaceOnPlane : MonoBehaviour
 {
-    public ObjectDatabase objectDatabase; // Reference to the ObjectDatabase scriptable object
-    public GameObject contentUIPrefab; // Prefab for the button UI element
-    public Transform scrollbarContent; // Parent transform for the buttons (Scrollbar Content)
-
-    private GameObject MyObject; // The currently selected object
+    public ObjectDatabase objectDatabase;
+    public GameObject contentUIPrefab;
+    public Transform scrollbarContent;
+    private GameObject MyObject;
     public GameObject placementIndicator;
     public ARRaycastManager RaycastManager;
     public float scaleDuration = 1.0f;
     public Vector3 initialScale = Vector3.zero;
     public Vector3 finalScale = Vector3.one;
+    public Button moveButton;
+    public Button deleteButton;
+    public Camera arCamera;
+    public TMP_Text costText;
 
-    public Button moveButton; // Reference to the TMP Button for toggling drag
-    public Button deleteButton; // Reference to the button for deleting the selected object
-    public Camera arCamera; // AR camera for raycasting
-    public TMP_Text costText; // TMPro element to display the total cost
-
-    private List<GameObject> placedObjects = new List<GameObject>(); // List to store placed objects
-    private Dictionary<GameObject, float> objectCostMap = new Dictionary<GameObject, float>(); // Map to track costs of placed objects
-    private float totalCost = 0; // Total cost of placed objects
+    private List<GameObject> placedObjects = new List<GameObject>();
+    private Dictionary<GameObject, float> objectCostMap = new Dictionary<GameObject, float>();
+    private float totalCost = 0;
     private GameObject visualIndicator;
     private Pose placementPose;
     private bool placementPoseIsValid = false;
@@ -37,38 +35,39 @@ public class PlaceOnPlane : MonoBehaviour
     private float initialAngle;
     private Quaternion initialRotation;
     private bool isResizingEnabled = true;
-    private bool canPlaceObject = false; // Track if the object can be placed
-    private bool isDraggingEnabled = false; // Dragging enabled/disabled state
-    private bool isDragging = false; // Dragging state
-    private GameObject selectedPlacedObject; // Object being dragged
+    private bool canPlaceObject = false;
+    private bool isDraggingEnabled = false;
+    private bool isDragging = false;
+    private GameObject selectedPlacedObject;
 
     private void Awake()
     {
-        PopulateScrollbarContent(); // Populate the scrollbar content with buttons
+        PopulateScrollbarContent();
     }
 
     void Start()
     {
         RaycastManager = GetComponent<ARRaycastManager>();
         visualIndicator = Instantiate(placementIndicator);
-        MyObject = null; // No object selected initially
+        visualIndicator.SetActive(false);
+        MyObject = null;
 
-        // Initialize dragging toggle button if assigned
         if (moveButton != null)
         {
-            moveButton.onClick.AddListener(ToggleDragging); // Assign the toggle functionality to the button
+            moveButton.onClick.AddListener(ToggleDragging);
         }
 
-        // Initialize delete button if assigned
         if (deleteButton != null)
         {
-            deleteButton.onClick.AddListener(DeleteSelectedObject); // Assign the delete functionality to the button
+            deleteButton.onClick.AddListener(DeleteSelectedObject);
         }
         UpdateCostUI();
     }
 
     void Update()
     {
+        if (!enabled) return;
+
         UpdatePlacementPose();
         UpdatePlacementIndicator();
 
@@ -76,48 +75,50 @@ public class PlaceOnPlane : MonoBehaviour
 
         var touch = Touchscreen.current.primaryTouch;
 
-        // Skip processing if the touch is over a UI element
         if (IsTouchOverUI(touch.position.ReadValue()))
             return;
 
-        // Handle object placement
         if (canPlaceObject && touch.press.isPressed && placementPoseIsValid && MyObject != null &&
             touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
         {
-            // Instantiate the object only once after selection
-            GameObject placedObject = Instantiate(MyObject, placementPose.position, placementPose.rotation);
-            StartCoroutine(LerpObjectScale(initialScale, finalScale, scaleDuration, placedObject));
-            placedObjects.Add(placedObject); // Store placed object in the list
-
-            // Add the cost of the placed object
-            float objectCost = GetObjectCost(MyObject);
-            objectCostMap.Add(placedObject, objectCost);
-            totalCost += objectCost;
-            UpdateCostUI();
-
-            canPlaceObject = false; // Disable further placement of the same object
+            PlaceObject();
         }
 
-        // Handle object resizing and rotation with pinch gesture
         if (Touchscreen.current.touches.Count >= 2 && placedObjects.Count > 0)
         {
             HandlePinchAndRotation();
         }
 
-        // Handle touch for selecting an object
         if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
         {
             SelectPlacedObject(touch.position.ReadValue());
         }
 
-        // Handle dragging of the selected object
         if (isDraggingEnabled && isDragging)
         {
             DragObject();
         }
     }
 
-    // Populate the scrollbar content with buttons for each object in the ObjectDatabase
+    public void SetPlacementMode(bool active)
+    {
+        enabled = active;
+        visualIndicator.SetActive(active && canPlaceObject);
+
+        if (!active)
+        {
+            DeselectObject();
+        }
+    }
+
+    public void DeselectObject()
+    {
+        MyObject = null;
+        canPlaceObject = false;
+        selectedPlacedObject = null;
+        isDragging = false;
+    }
+
     private void PopulateScrollbarContent()
     {
         if (contentUIPrefab == null || scrollbarContent == null || objectDatabase == null)
@@ -128,27 +129,38 @@ public class PlaceOnPlane : MonoBehaviour
 
         for (int i = 0; i < objectDatabase.objectsList.Count; i++)
         {
-            // Instantiate the button prefab
             GameObject buttonObject = Instantiate(contentUIPrefab, scrollbarContent);
             Button button = buttonObject.GetComponent<Button>();
             Image buttonImage = buttonObject.GetComponent<Image>();
             ObjectData objectData = objectDatabase.objectsList[i];
 
-            // Set the button image
             if (buttonImage != null && objectData.image != null)
             {
                 buttonImage.sprite = objectData.image;
             }
 
-            // Assign the SelectObjectToPlace method to the button's onClick event
-            int objectIndex = i; // Capture the index for the lambda
+            int objectIndex = i;
             button.onClick.AddListener(() => SelectObjectToPlace(objectIndex));
         }
     }
 
+    private void PlaceObject()
+    {
+        GameObject placedObject = Instantiate(MyObject, placementPose.position, placementPose.rotation);
+        StartCoroutine(LerpObjectScale(initialScale, finalScale, scaleDuration, placedObject));
+        placedObjects.Add(placedObject);
+
+        float objectCost = GetObjectCost(MyObject);
+        objectCostMap.Add(placedObject, objectCost);
+        totalCost += objectCost;
+        UpdateCostUI();
+
+        canPlaceObject = false;
+    }
+
     private void UpdateCostUI()
     {
-        costText.text = "Total Cost: \nRs " + totalCost.ToString("F2"); // Update the TMPro UI text
+        costText.text = "Total Cost: \nRs " + totalCost.ToString("F2");
     }
 
     private bool IsTouchOverUI(Vector2 touchPosition)
@@ -234,7 +246,7 @@ public class PlaceOnPlane : MonoBehaviour
 
     private void ToggleDragging()
     {
-        isDraggingEnabled = !isDraggingEnabled; // Toggle the dragging state
+        isDraggingEnabled = !isDraggingEnabled;
         if (isDraggingEnabled && selectedPlacedObject != null)
         {
             StartDragging();
@@ -267,12 +279,10 @@ public class PlaceOnPlane : MonoBehaviour
 
         if (RaycastManager.Raycast(touchPosition, hits, TrackableType.Planes))
         {
-            // Move the object to the new position
             selectedPlacedObject.transform.position = hits[0].pose.position;
         }
     }
 
-    // Selects the object the user taps on
     private void SelectPlacedObject(Vector2 touchPosition)
     {
         Ray ray = arCamera.ScreenPointToRay(touchPosition);
@@ -280,20 +290,17 @@ public class PlaceOnPlane : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            // Check if the hit object is one of the placed objects
             if (placedObjects.Contains(hit.collider.gameObject))
             {
-                selectedPlacedObject = hit.collider.gameObject; // Select the object that was touched
+                selectedPlacedObject = hit.collider.gameObject;
             }
         }
     }
 
-    // Deletes the currently selected object
     private void DeleteSelectedObject()
     {
         if (selectedPlacedObject != null)
         {
-            // Subtract the cost of the selected object from the total
             if (objectCostMap.TryGetValue(selectedPlacedObject, out float objectCost))
             {
                 totalCost -= objectCost;
@@ -304,21 +311,20 @@ public class PlaceOnPlane : MonoBehaviour
             Destroy(selectedPlacedObject);
             selectedPlacedObject = null;
 
-            UpdateCostUI(); // Update the total cost after deletion
+            UpdateCostUI();
         }
     }
 
-    // Called when a new object is selected from the UI
     public void SelectObjectToPlace(int objectIndex)
     {
         if (objectIndex >= 0 && objectIndex < objectDatabase.objectsList.Count)
         {
             MyObject = objectDatabase.objectsList[objectIndex].objectToPlace;
-            canPlaceObject = true; // Allow placing the newly selected object
+            canPlaceObject = true;
+            visualIndicator.SetActive(true);
         }
     }
 
-    // Helper method to get the cost of an object from the ObjectDatabase
     private float GetObjectCost(GameObject objectToPlace)
     {
         foreach (var objectData in objectDatabase.objectsList)
@@ -328,6 +334,6 @@ public class PlaceOnPlane : MonoBehaviour
                 return objectData.price;
             }
         }
-        return 0; // Default cost if not found
+        return 0;
     }
 }
