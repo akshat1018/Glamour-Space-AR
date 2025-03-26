@@ -13,11 +13,19 @@ public class ARModeToggler : MonoBehaviour
 
     private Button toggleButton;
     private bool isMeasurementMode;
+    private Color originalImageColor; // Store the original image color
 
     private void Awake()
     {
         toggleButton = GetComponent<Button>();
         toggleButton.onClick.AddListener(ToggleMode);
+        
+        // Store the original image color
+        var image = toggleButton.GetComponent<Image>();
+        if (image != null)
+        {
+            originalImageColor = image.color;
+        }
     }
 
     private void Start()
@@ -52,11 +60,15 @@ public class ARModeToggler : MonoBehaviour
         if (text != null)
         {
             text.text = isMeasurementMode ? "Switch to Placement" : "Switch to Measurement";
+            text.color = isMeasurementMode ? new Color(0.2f, 0.8f, 0.2f) : new Color(0.8f, 0.2f, 0.2f);
         }
 
-        var colors = toggleButton.colors;
-        colors.normalColor = isMeasurementMode ? new Color(0.2f, 0.8f, 0.2f) : new Color(0.8f, 0.2f, 0.2f);
-        toggleButton.colors = colors;
+        // Restore the original image color
+        var image = toggleButton.GetComponent<Image>();
+        if (image != null)
+        {
+            image.color = originalImageColor;
+        }
     }
 
     private void OnDestroy()

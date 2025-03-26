@@ -287,6 +287,12 @@ public class ARMeasurementTool : MonoBehaviour
 
     private void DisplayArea()
     {
+        if (!ArePointsCoplanar(measurementPoints))
+        {
+            Debug.LogWarning("Points are not coplanar - area calculation may be inaccurate");
+            // Optionally show a warning to the user
+        }
+
         float area = CalculatePolygonArea(measurementPoints);
         area = ConvertAreaToSelectedUnit(area);
 
@@ -325,17 +331,78 @@ public class ARMeasurementTool : MonoBehaviour
 
     private float CalculatePolygonArea(List<Vector3> vertices)
     {
-        int n = vertices.Count;
-        float area = 0.0f;
+        if (vertices.Count < 3)
+            return 0f;
 
-        for (int i = 0; i < n; i++)
+        // Calculate the normal of the polygon's plane
+        Vector3 normal = Vector3.zero;
+        for (int i = 0; i < vertices.Count; i++)
         {
-            int j = (i + 1) % n;
-            area += vertices[i].x * vertices[j].z;
-            area -= vertices[j].x * vertices[i].z;
+            Vector3 current = vertices[i];
+            Vector3 next = vertices[(i + 1) % vertices.Count];
+            normal.x += (current.y - next.y) * (current.z + next.z);
+            normal.y += (current.z - next.z) * (current.x + next.x);
+            normal.z += (current.x - next.x) * (current.y + next.y);
+        }
+        normal.Normalize();
+
+        // Project vertices onto the most significant plane
+        float area = 0f;
+        int n = vertices.Count;
+
+        // Choose the projection plane based on the dominant normal component
+        if (Mathf.Abs(normal.x) > Mathf.Abs(normal.y) && Mathf.Abs(normal.x) > Mathf.Abs(normal.z))
+        {
+            // Project onto YZ plane
+            for (int i = 0; i < n; i++)
+            {
+                int j = (i + 1) % n;
+                area += vertices[i].y * vertices[j].z;
+                area -= vertices[j].y * vertices[i].z;
+            }
+        }
+        else if (Mathf.Abs(normal.y) > Mathf.Abs(normal.z))
+        {
+            // Project onto XZ plane (original behavior)
+            for (int i = 0; i < n; i++)
+            {
+                int j = (i + 1) % n;
+                area += vertices[i].x * vertices[j].z;
+                area -= vertices[j].x * vertices[i].z;
+            }
+        }
+        else
+        {
+            // Project onto XY plane
+            for (int i = 0; i < n; i++)
+            {
+                int j = (i + 1) % n;
+                area += vertices[i].x * vertices[j].y;
+                area -= vertices[j].x * vertices[i].y;
+            }
         }
 
         return Mathf.Abs(area) / 2.0f;
+    }
+
+    private bool ArePointsCoplanar(List<Vector3> points, float threshold = 0.01f)
+    {
+        if (points.Count < 4) return true;
+        
+        // Calculate plane from first 3 points
+        Vector3 v1 = points[1] - points[0];
+        Vector3 v2 = points[2] - points[0];
+        Vector3 normal = Vector3.Cross(v1, v2).normalized;
+        
+        // Check if all other points lie on this plane
+        for (int i = 3; i < points.Count; i++)
+        {
+            Vector3 v = points[i] - points[0];
+            float distance = Mathf.Abs(Vector3.Dot(v, normal));
+            if (distance > threshold)
+                return false;
+        }
+        return true;
     }
 
     private float CalculatePerimeter(List<Vector3> vertices)
@@ -388,11 +455,11 @@ public class ARMeasurementTool : MonoBehaviour
     {
         switch (currentUnit)
         {
-            case MeasurementUnit.Centimeters: return "cm²";
-            case MeasurementUnit.Meters: return "m²";
-            case MeasurementUnit.Inches: return "in²";
-            case MeasurementUnit.Feet: return "ft²";
-            default: return "cm²";
+            case MeasurementUnit.Centimeters: return "cmÂ²";
+            case MeasurementUnit.Meters: return "mÂ²";
+            case MeasurementUnit.Inches: return "inÂ²";
+            case MeasurementUnit.Feet: return "ftÂ²";
+            default: return "cmÂ²";
         }
     }
 

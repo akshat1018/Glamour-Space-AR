@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 7627561901610279033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1369363709206801668}
@@ -106,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 855872243250120339, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 74157.805
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 874367576588594396, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -146,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 972948626752326908, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 84.99
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 1163973014224790326, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -231,6 +231,10 @@ PrefabInstance:
     - target: {fileID: 4251965762938450246, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_TagString
       value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583277140191360554, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_text
+      value: Enter Budget...
       objectReference: {fileID: 0}
     - target: {fileID: 4583277140191360554, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_fontAsset
@@ -382,11 +386,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7906627736452939802, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_Size
-      value: 0.80222225
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7906627736452939802, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8056667039627019953, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_text
