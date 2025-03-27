@@ -170,6 +170,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1394859244}
+    - target: {fileID: 5212803359736218706, guid: 68302134c49e5a344ba74102b3430371, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 5212803359736218706, guid: 68302134c49e5a344ba74102b3430371, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 5212803359736218706, guid: 68302134c49e5a344ba74102b3430371, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -393
+      objectReference: {fileID: 0}
+    - target: {fileID: 5212803359736218706, guid: 68302134c49e5a344ba74102b3430371, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2105
+      objectReference: {fileID: 0}
     - target: {fileID: 5687536402405165631, guid: 68302134c49e5a344ba74102b3430371, type: 3}
       propertyPath: m_Sprite
       value: 
