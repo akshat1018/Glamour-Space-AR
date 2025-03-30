@@ -9,7 +9,7 @@ public class ScreenshotManager : MonoBehaviour
 {
     [Header("UI References")]
     public Button captureButton;
-    public string gallerySceneName = "GalleryScene";
+    public string gallerySceneName = "3_Main Menu";
     public Canvas[] uiCanvasesToHide; // Assign all UI canvases you want to hide during screenshot
 
     [Header("Screenshot Settings")]
@@ -93,7 +93,7 @@ public class ScreenshotManager : MonoBehaviour
         string filePath = Path.Combine(fullScreenshotPath, fileName);
 
         // Save to file
-        byte[] bytes = imageFormat == ImageFormat.PNG ? 
+        byte[] bytes = imageFormat == ImageFormat.PNG ?
             screenTexture.EncodeToPNG() : screenTexture.EncodeToJPG(85);
         File.WriteAllBytes(filePath, bytes);
 
