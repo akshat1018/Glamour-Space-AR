@@ -66,4 +66,11 @@ public class UIManager : MonoBehaviour
             emailVerificationText.text = $"Couldn't send email: {errorMessage}";
         }
     }
+    public void ShowErrorMessage(string message)
+{
+    ClearUI();
+    loginPanel.SetActive(true);
+    // You might want to add an error text field in your login panel
+    // errorText.text = message;
+}
 }

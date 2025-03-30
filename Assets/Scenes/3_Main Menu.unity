@@ -571,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6210394821483287631, guid: f59bd566ad9a1c94ba421eb15fc91e49, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2301.8872
+      value: 16864.012
       objectReference: {fileID: 0}
     - target: {fileID: 7073706298893704911, guid: f59bd566ad9a1c94ba421eb15fc91e49, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1150,7 +1150,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 637084247}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1564140413}
+        m_TargetAssemblyTypeName: LogoutButton, Assembly-CSharp
+        m_MethodName: OnLogoutButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &637084247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2520,6 +2532,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442720875}
   m_CullTransparentMesh: 1
+--- !u!1 &1564140412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1564140414}
+  - component: {fileID: 1564140413}
+  m_Layer: 0
+  m_Name: LogoutHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1564140413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564140412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c90bcb839a1759419352c9a3e862154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1564140414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564140412}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 581.0909, y: 1343.7983, z: 11.8122635}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1642338879
 GameObject:
   m_ObjectHideFlags: 0
@@ -3677,3 +3733,4 @@ SceneRoots:
   - {fileID: 450520742}
   - {fileID: 1003026196}
   - {fileID: 3592853479299665303}
+  - {fileID: 1564140414}

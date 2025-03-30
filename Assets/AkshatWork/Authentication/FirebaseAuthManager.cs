@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using Firebase;
 using Firebase.Auth;
+using UnityEngine.SceneManagement;
 
 public class FirebaseAuthManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class FirebaseAuthManager : MonoBehaviour
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
     public FirebaseUser user;
+    public static FirebaseAuthManager Instance;
 
     // Login Variables
     [Space]
@@ -26,6 +28,20 @@ public class FirebaseAuthManager : MonoBehaviour
     public TMP_InputField passwordRegisterField;
     public TMP_InputField confirmPasswordRegisterField;
 
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
     private void Start()
     {
         StartCoroutine(CheckAndFixDependenciesAsync());
@@ -34,38 +50,36 @@ public class FirebaseAuthManager : MonoBehaviour
     private IEnumerator CheckAndFixDependenciesAsync()
     {
         var dependencyTask = FirebaseApp.CheckAndFixDependenciesAsync();
-        yield return new WaitUntil(()=> dependencyTask.IsCompleted);
+        yield return new WaitUntil(() => dependencyTask.IsCompleted);
 
         dependencyStatus = dependencyTask.Result;
 
-            if (dependencyStatus == DependencyStatus.Available)
-            {
-                InitializeFirebase();
-                yield return new WaitForEndOfFrame();
-                StartCoroutine(CheckForAutoLogin());
-            }
-            else
-            {
-                Debug.LogError("Could not resolve all firebase dependencies: " + dependencyStatus);
-            }
+        if (dependencyStatus == DependencyStatus.Available)
+        {
+            InitializeFirebase();
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(CheckForAutoLogin());
+        }
+        else
+        {
+            Debug.LogError("Could not resolve all firebase dependencies: " + dependencyStatus);
+        }
     }
 
-    void InitializeFirebase()
+    private void InitializeFirebase()
     {
-        // Set the default instance object
         auth = FirebaseAuth.DefaultInstance;
-
         auth.StateChanged += AuthStateChanged;
-        AuthStateChanged(this, null);
+        user = auth.CurrentUser;
     }
 
     private IEnumerator CheckForAutoLogin()
     {
-        if(user != null)
+        if (user != null)
         {
             var reloadUserTask = user.ReloadAsync();
 
-            yield return new WaitUntil(()=> reloadUserTask.IsCompleted);
+            yield return new WaitUntil(() => reloadUserTask.IsCompleted);
 
             AutoLogin();
         }
@@ -77,12 +91,12 @@ public class FirebaseAuthManager : MonoBehaviour
 
     private void AutoLogin()
     {
-        if(user!= null)
+        if (user != null)
         {
             References.userName = user.DisplayName;
             UnityEngine.SceneManagement.SceneManager.LoadScene("3_Main Menu");
         }
-        
+
         else
         {
             UIManager.Instance.OpenLoginPanel();
@@ -90,22 +104,22 @@ public class FirebaseAuthManager : MonoBehaviour
     }
 
     // Track state changes of the auth object.
-    void AuthStateChanged(object sender, System.EventArgs eventArgs)
+    private void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
         if (auth.CurrentUser != user)
         {
             bool signedIn = user != auth.CurrentUser && auth.CurrentUser != null;
-
-            if (!signedIn && user != null)
-            {
-                Debug.Log("Signed out " + user.UserId);
-            }
-
             user = auth.CurrentUser;
 
             if (signedIn)
             {
-                Debug.Log("Signed in " + user.UserId);
+                Debug.Log("User signed in: " + user.UserId);
+                References.userName = user.DisplayName;
+            }
+            else
+            {
+                Debug.Log("User signed out.");
+                References.userName = "";
             }
         }
     }
@@ -158,10 +172,10 @@ public class FirebaseAuthManager : MonoBehaviour
 
             Debug.LogFormat("{0} You Are Successfully Logged In", user.DisplayName);
 
-            if(user.IsEmailVerified)
+            if (user.IsEmailVerified)
             {
-            References.userName = user.DisplayName;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("3_Main Menu");
+                References.userName = user.DisplayName;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("3_Main Menu");
             }
             else
             {
@@ -270,15 +284,14 @@ public class FirebaseAuthManager : MonoBehaviour
                 else
                 {
                     Debug.Log("Registration Successful! Welcome " + user.DisplayName);
-                    if(user.IsEmailVerified)
-                    {
-                        UIManager.Instance.OpenLoginPanel();
-                    }
-                    else
+                    if (!user.IsEmailVerified)
                     {
                         SendEmailForVerification();
                     }
-                    UIManager.Instance.OpenLoginPanel();
+                    else
+                    {
+                        UIManager.Instance.OpenLoginPanel();
+                    }
                 }
             }
         }
@@ -290,13 +303,13 @@ public class FirebaseAuthManager : MonoBehaviour
 
     private IEnumerator SendEmailForVerificationAsync()
     {
-        if(user!=null)
+        if (user != null)
         {
             var sendEmailTask = user.SendEmailVerificationAsync();
 
-            yield return new WaitUntil(()=> sendEmailTask.IsCompleted);
+            yield return new WaitUntil(() => sendEmailTask.IsCompleted);
 
-            if(sendEmailTask.Exception !=null)
+            if (sendEmailTask.Exception != null)
             {
                 FirebaseException firebaseException = sendEmailTask.Exception.GetBaseException() as FirebaseException;
                 AuthError error = (AuthError)firebaseException.ErrorCode;
@@ -306,14 +319,14 @@ public class FirebaseAuthManager : MonoBehaviour
                 switch (error)
                 {
                     case AuthError.Cancelled:
-                    errorMessage = "Email Verification is Cancelled";
-                    break;
+                        errorMessage = "Email Verification is Cancelled";
+                        break;
                     case AuthError.TooManyRequests:
-                    errorMessage = "Too Many Request";
-                    break;
+                        errorMessage = "Too Many Request";
+                        break;
                     case AuthError.InvalidRecipientEmail:
-                    errorMessage = "Email is invalid";
-                    break;
+                        errorMessage = "Email is invalid";
+                        break;
                 }
 
                 UIManager.Instance.ShowVerificationResponse(false, user.Email, errorMessage);
@@ -321,9 +334,18 @@ public class FirebaseAuthManager : MonoBehaviour
             else
             {
                 Debug.Log("Email has been sent sucessfully");
-                UIManager.Instance.ShowVerificationResponse(true,user.Email,null);
+                UIManager.Instance.ShowVerificationResponse(true, user.Email, null);
 
             }
+        }
+    }
+    public void Logout()
+    {
+        if (auth != null)
+        {
+            auth.SignOut();
+            References.userName = ""; // Clear stored username
+            SceneManager.LoadScene("1_User_Login"); // Change to your actual login scene name
         }
     }
 }
