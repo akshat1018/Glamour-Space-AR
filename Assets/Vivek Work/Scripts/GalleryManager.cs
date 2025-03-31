@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public class GalleryManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GalleryManager : MonoBehaviour
     [SerializeField] private RectTransform screenshotContentPanel;
     [SerializeField] private GameObject screenshotPrefab;
     [SerializeField] private RectTransform galleryUI;
+    [SerializeField] private Button deleteButton;
 
     [Header("Enlarged Image Settings")]
     [SerializeField] private GameObject enlargedImagePrefab;
@@ -23,12 +25,26 @@ public class GalleryManager : MonoBehaviour
 
     [Header("Display Settings")]
     [SerializeField] private int thumbnailSize = 256;
+    [SerializeField] private Color selectionColor = Color.blue;
+    [SerializeField] private Vector2 selectionOutlineSize = new Vector2(3, -3);
     private const int ENLARGED_WIDTH = 1000;
     private const int ENLARGED_HEIGHT = 1800;
 
+    [Header("Interaction Settings")]
+    [SerializeField] private float longPressDuration = 0.5f;
+
+    [Header("Prefab Settings")]
+    [SerializeField] private string thumbnailChildName = "ThumbnailImage";
+
     private List<Texture2D> loadedTextures = new List<Texture2D>();
+    private List<string> loadedPaths = new List<string>();
+    private List<GameObject> thumbnailButtons = new List<GameObject>();
+    private List<GameObject> selectedThumbnails = new List<GameObject>();
     private GameObject currentEnlargedImage;
+    private GameObject currentlyEnlargedThumbnail;
     private bool isAnimating = false;
+    private bool isSelectionMode = false;
+    private Coroutine longPressCoroutine;
 
     private void Start()
     {
@@ -40,12 +56,16 @@ public class GalleryManager : MonoBehaviour
     {
         galleryToggleButton.onClick.AddListener(ToggleGalleryUI);
         galleryBackButton.onClick.AddListener(OnBackButtonClicked);
+        deleteButton.onClick.AddListener(DeleteSelected);
+
+        deleteButton.gameObject.SetActive(false);
         galleryUI.localScale = Vector3.zero;
     }
 
     private void LoadScreenshots()
     {
         List<string> screenshotPaths = ScreenshotManager.GetScreenshotPaths();
+        loadedPaths = new List<string>(screenshotPaths);
         StartCoroutine(LoadScreenshotsCoroutine(screenshotPaths));
     }
 
@@ -57,7 +77,7 @@ public class GalleryManager : MonoBehaviour
             if (texture != null)
             {
                 loadedTextures.Add(texture);
-                CreateThumbnailButton(texture);
+                CreateThumbnailButton(texture, path);
                 yield return null;
             }
         }
@@ -65,30 +85,182 @@ public class GalleryManager : MonoBehaviour
 
     private Texture2D LoadTextureFromFile(string path)
     {
-        if (!File.Exists(path)) return null;
+        try
+        {
+            if (!System.IO.File.Exists(path)) return null;
 
-        byte[] fileData = File.ReadAllBytes(path);
-        Texture2D texture = new Texture2D(2, 2);
-        texture.LoadImage(fileData);
-        return texture;
+            byte[] fileData = System.IO.File.ReadAllBytes(path);
+            Texture2D texture = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+            if (!texture.LoadImage(fileData)) return null;
+            return texture;
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error loading texture: {e.Message}");
+            return null;
+        }
     }
 
-    private void CreateThumbnailButton(Texture2D texture)
+    private void CreateThumbnailButton(Texture2D texture, string path)
     {
         GameObject thumbnailObj = Instantiate(screenshotPrefab, screenshotContentPanel);
-        Image thumbnailImage = thumbnailObj.GetComponentInChildren<Image>();
+        thumbnailButtons.Add(thumbnailObj);
 
-        if (thumbnailImage != null)
+        // Set thumbnail image
+        Transform thumbnailChild = thumbnailObj.transform.Find(thumbnailChildName);
+        if (thumbnailChild != null)
         {
-            thumbnailImage.sprite = CreateThumbnailSprite(texture);
+            Image thumbnailImage = thumbnailChild.GetComponent<Image>();
+            if (thumbnailImage != null)
+            {
+                thumbnailImage.sprite = CreateThumbnailSprite(texture);
+            }
         }
 
-        Button button = thumbnailObj.GetComponent<Button>();
-        if (button != null)
+        // Setup event triggers
+        EventTrigger trigger = thumbnailObj.GetComponent<EventTrigger>() ?? thumbnailObj.AddComponent<EventTrigger>();
+        trigger.triggers.Clear();
+
+        // Pointer down - start long press detection
+        EventTrigger.Entry pointerDownEntry = new EventTrigger.Entry();
+        pointerDownEntry.eventID = EventTriggerType.PointerDown;
+        pointerDownEntry.callback.AddListener((data) => {
+            longPressCoroutine = StartCoroutine(LongPressDetection(thumbnailObj));
+        });
+        trigger.triggers.Add(pointerDownEntry);
+
+        // Pointer up - cancel long press
+        EventTrigger.Entry pointerUpEntry = new EventTrigger.Entry();
+        pointerUpEntry.eventID = EventTriggerType.PointerUp;
+        pointerUpEntry.callback.AddListener((data) => {
+            if (longPressCoroutine != null)
+            {
+                StopCoroutine(longPressCoroutine);
+                longPressCoroutine = null;
+            }
+        });
+        trigger.triggers.Add(pointerUpEntry);
+
+        // Click - handle normal tap
+        EventTrigger.Entry clickEntry = new EventTrigger.Entry();
+        clickEntry.eventID = EventTriggerType.PointerClick;
+        clickEntry.callback.AddListener((data) => {
+            if (!isSelectionMode)
+            {
+                currentlyEnlargedThumbnail = thumbnailObj;
+                ShowEnlargedImage(texture);
+            }
+        });
+        trigger.triggers.Add(clickEntry);
+    }
+
+    private IEnumerator LongPressDetection(GameObject thumbnailObj)
+    {
+        float pressTime = Time.time;
+
+        while (Time.time - pressTime < longPressDuration)
         {
-            button.onClick.AddListener(() => ShowEnlargedImage(texture));
+            yield return null;
+        }
+
+        OnThumbnailLongPress(thumbnailObj);
+        longPressCoroutine = null;
+    }
+
+    private void OnThumbnailLongPress(GameObject thumbnailObj)
+    {
+        if (!isSelectionMode)
+        {
+            isSelectionMode = true;
+            deleteButton.gameObject.SetActive(true);
+        }
+        ToggleSelection(thumbnailObj);
+    }
+
+    private void ToggleSelection(GameObject thumbnailObj)
+    {
+        if (selectedThumbnails.Contains(thumbnailObj))
+        {
+            RemoveSelectionOutline(thumbnailObj);
+            selectedThumbnails.Remove(thumbnailObj);
+        }
+        else
+        {
+            AddSelectionOutline(thumbnailObj);
+            selectedThumbnails.Add(thumbnailObj);
+        }
+
+        if (selectedThumbnails.Count == 0)
+        {
+            isSelectionMode = false;
+            deleteButton.gameObject.SetActive(false);
         }
     }
+
+    private void AddSelectionOutline(GameObject thumbnailObj)
+    {
+        Outline outline = thumbnailObj.GetComponent<Outline>() ?? thumbnailObj.AddComponent<Outline>();
+        outline.effectColor = selectionColor;
+        outline.effectDistance = selectionOutlineSize;
+        outline.enabled = true;
+    }
+
+    private void RemoveSelectionOutline(GameObject thumbnailObj)
+    {
+        Outline outline = thumbnailObj.GetComponent<Outline>();
+        if (outline != null)
+        {
+            outline.enabled = false;
+        }
+    }
+
+    private void DeleteSelected()
+    {
+        StartCoroutine(DeleteSelectedCoroutine());
+    }
+
+    private IEnumerator DeleteSelectedCoroutine()
+    {
+        // Create a copy of the list to avoid modification during iteration
+        List<GameObject> toDelete = new List<GameObject>(selectedThumbnails);
+
+        foreach (GameObject thumbnail in toDelete)
+        {
+            if (thumbnail == null) continue;
+
+            int index = thumbnailButtons.IndexOf(thumbnail);
+            if (index >= 0 && index < loadedPaths.Count)
+            {
+                // Delete file
+                if (System.IO.File.Exists(loadedPaths[index]))
+                {
+                    System.IO.File.Delete(loadedPaths[index]);
+                }
+
+                // Remove from lists
+                if (index < loadedTextures.Count)
+                {
+                    Destroy(loadedTextures[index]);
+                    loadedTextures.RemoveAt(index);
+                }
+                loadedPaths.RemoveAt(index);
+            }
+
+            // Remove from scene and tracking lists
+            thumbnailButtons.Remove(thumbnail);
+            selectedThumbnails.Remove(thumbnail);
+            Destroy(thumbnail);
+
+            yield return null;
+        }
+
+        // Rebuild layout
+        LayoutRebuilder.ForceRebuildLayoutImmediate(screenshotContentPanel);
+
+        // Clear selection
+        ClearSelection();
+    }
+
 
     private Sprite CreateThumbnailSprite(Texture2D source)
     {
@@ -112,11 +284,14 @@ public class GalleryManager : MonoBehaviour
 
     private void ShowEnlargedImage(Texture2D texture)
     {
-        if (isAnimating) return;
+        if (isAnimating || isSelectionMode) return;
 
         InitializeEnlargedImage();
         SetEnlargedImage(texture);
         AnimateEnlargedImage(true);
+
+        // Enable delete button for this specific image
+        deleteButton.gameObject.SetActive(true);
     }
 
     private void InitializeEnlargedImage()
@@ -172,6 +347,8 @@ public class GalleryManager : MonoBehaviour
     {
         Destroy(currentEnlargedImage);
         currentEnlargedImage = null;
+        currentlyEnlargedThumbnail = null;
+        deleteButton.gameObject.SetActive(false);
     }
 
     private void HideEnlargedImage()
@@ -212,7 +389,11 @@ public class GalleryManager : MonoBehaviour
 
     private void OnBackButtonClicked()
     {
-        if (currentEnlargedImage != null)
+        if (isSelectionMode)
+        {
+            ClearSelection();
+        }
+        else if (currentEnlargedImage != null)
         {
             HideEnlargedImage();
         }
@@ -222,6 +403,31 @@ public class GalleryManager : MonoBehaviour
         }
     }
 
+    private void ClearSelection()
+    {
+        // Create a new list to avoid modifying the collection while iterating
+        List<GameObject> toRemove = new List<GameObject>();
+
+        foreach (GameObject thumbnail in selectedThumbnails)
+        {
+            if (thumbnail != null) // Check if the object still exists
+            {
+                RemoveSelectionOutline(thumbnail);
+            }
+            toRemove.Add(thumbnail);
+        }
+
+        // Remove all items (including null ones) from the selection
+        foreach (var item in toRemove)
+        {
+            selectedThumbnails.Remove(item);
+        }
+
+        isSelectionMode = false;
+        deleteButton.gameObject.SetActive(false);
+    }
+
+   
     private void OnDestroy()
     {
         ClearLoadedTextures();
