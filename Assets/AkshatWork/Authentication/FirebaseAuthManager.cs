@@ -93,7 +93,7 @@ public class FirebaseAuthManager : MonoBehaviour
     {
         if (user != null)
         {
-            References.userName = user.DisplayName;
+            References.SetUserData(user);
             UnityEngine.SceneManagement.SceneManager.LoadScene("3_Main Menu");
         }
 
@@ -114,12 +114,12 @@ public class FirebaseAuthManager : MonoBehaviour
             if (signedIn)
             {
                 Debug.Log("User signed in: " + user.UserId);
-                References.userName = user.DisplayName;
+                 References.SetUserData(user);
             }
             else
             {
                 Debug.Log("User signed out.");
-                References.userName = "";
+                References.ClearUserData();
             }
         }
     }
@@ -344,8 +344,35 @@ public class FirebaseAuthManager : MonoBehaviour
         if (auth != null)
         {
             auth.SignOut();
-            References.userName = ""; // Clear stored username
+            References.ClearUserData(); // Clear stored username
             SceneManager.LoadScene("1_User_Login"); // Change to your actual login scene name
         }
     }
+
+    public void SendPasswordResetEmail()
+{
+    if (string.IsNullOrEmpty(emailLoginField.text))
+    {
+        Debug.LogError("Email field is empty");
+        return;
+    }
+    StartCoroutine(SendPasswordResetEmailAsync(emailLoginField.text));
+}
+
+private IEnumerator SendPasswordResetEmailAsync(string email)
+{
+    var resetTask = auth.SendPasswordResetEmailAsync(email);
+    yield return new WaitUntil(() => resetTask.IsCompleted);
+
+    if (resetTask.Exception != null)
+    {
+        Debug.LogError($"Password reset failed: {resetTask.Exception}");
+        // Show error to user (add a TMP error text field)
+    }
+    else
+    {
+        Debug.Log("Password reset email sent!");
+        // Show success message (e.g., "Check your email")
+    }
+}
 }
