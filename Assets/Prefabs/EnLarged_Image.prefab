@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1166899783417165941}
   - component: {fileID: 4201038524361529649}
   - component: {fileID: 1443734036508734605}
+  - component: {fileID: 6656606260960565220}
   m_Layer: 5
   m_Name: EnLarged_Image
   m_TagString: Untagged
@@ -88,3 +89,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6656606260960565220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012229178787187202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 100.6
+  image: {fileID: 4201038524361529649}

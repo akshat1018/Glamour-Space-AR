@@ -25,8 +25,8 @@ public class GalleryManager : MonoBehaviour
 
     [Header("Display Settings")]
     [SerializeField] private int thumbnailSize = 256;
-    [SerializeField] private Color selectionColor = Color.blue;
-    [SerializeField] private Vector2 selectionOutlineSize = new Vector2(3, -3);
+    [SerializeField] private Color selectionColor = Color.cyan;
+    [SerializeField] private Vector2 selectionOutlineSize = new Vector2(4, -3);
     private const int ENLARGED_WIDTH = 1000;
     private const int ENLARGED_HEIGHT = 1800;
 
