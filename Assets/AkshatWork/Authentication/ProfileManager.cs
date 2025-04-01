@@ -108,7 +108,7 @@ public class ProfileManager : MonoBehaviour
         }
         else
         {
-            editStatusText.text = "Updated successfully!";
+            editStatusText.text = "Updated successfully";
             editStatusText.color = Color.green;
             
             // Update UI and references
