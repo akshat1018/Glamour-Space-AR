@@ -12,6 +12,9 @@ public class ScreenshotManager : MonoBehaviour
     public string gallerySceneName = "3_Main Menu";
     public Canvas[] uiCanvasesToHide; // Assign all UI canvases you want to hide during screenshot
 
+    [Header("Objects to Hide")]
+    public GameObject[] objectsToHide; // Assign specific GameObjects/Prefabs to hide during screenshot
+
     [Header("Screenshot Settings")]
     public string screenshotFolder = "Screenshots";
     public string screenshotBaseName = "Screenshot";
@@ -22,6 +25,7 @@ public class ScreenshotManager : MonoBehaviour
     private string fullScreenshotPath;
     private static List<string> screenshotPaths = new List<string>();
     private List<bool> originalCanvasStates = new List<bool>();
+    private List<bool> originalObjectStates = new List<bool>();
 
     public enum ImageFormat
     {
@@ -64,7 +68,7 @@ public class ScreenshotManager : MonoBehaviour
             captureButton.interactable = false;
         }
 
-        // Hide UI elements
+        // Store and hide UI elements
         originalCanvasStates.Clear();
         foreach (Canvas canvas in uiCanvasesToHide)
         {
@@ -75,7 +79,18 @@ public class ScreenshotManager : MonoBehaviour
             }
         }
 
-        // Wait for one frame to ensure UI is fully hidden
+        // Store and hide specific GameObjects
+        originalObjectStates.Clear();
+        foreach (GameObject obj in objectsToHide)
+        {
+            if (obj != null)
+            {
+                originalObjectStates.Add(obj.activeSelf);
+                obj.SetActive(false);
+            }
+        }
+
+        // Wait for one frame to ensure everything is fully hidden
         yield return null;
 
         // Wait for rendering to complete
@@ -106,6 +121,15 @@ public class ScreenshotManager : MonoBehaviour
             if (uiCanvasesToHide[i] != null && i < originalCanvasStates.Count)
             {
                 uiCanvasesToHide[i].enabled = originalCanvasStates[i];
+            }
+        }
+
+        // Restore GameObjects
+        for (int i = 0; i < objectsToHide.Length; i++)
+        {
+            if (objectsToHide[i] != null && i < originalObjectStates.Count)
+            {
+                objectsToHide[i].SetActive(originalObjectStates[i]);
             }
         }
 
