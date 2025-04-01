@@ -1384,6 +1384,7 @@ GameObject:
   - component: {fileID: 5421137812749870984}
   - component: {fileID: 3583346009303966474}
   - component: {fileID: 5930801833155397054}
+  - component: {fileID: 6701784859453207179}
   m_Layer: 5
   m_Name: 'Area_Dropdown '
   m_TagString: Untagged
@@ -1441,7 +1442,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6e9f5e569f8c22f499d8b7f61b4ea42d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1509,6 +1510,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
+--- !u!114 &6701784859453207179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5402181676849634700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 20
+  image: {fileID: 3583346009303966474}
 --- !u!1 &5818369906869906403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,6 +2452,7 @@ GameObject:
   - component: {fileID: 3121853297591713257}
   - component: {fileID: 8918897977776018117}
   - component: {fileID: 7656822684310629821}
+  - component: {fileID: 7591916547272905852}
   m_Layer: 5
   m_Name: Unit_Dropdown
   m_TagString: Untagged
@@ -2494,7 +2510,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6e9f5e569f8c22f499d8b7f61b4ea42d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2566,6 +2582,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
+--- !u!114 &7591916547272905852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8416186748599084008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 20
+  image: {fileID: 8918897977776018117}
 --- !u!1 &8639640152953331872
 GameObject:
   m_ObjectHideFlags: 0
