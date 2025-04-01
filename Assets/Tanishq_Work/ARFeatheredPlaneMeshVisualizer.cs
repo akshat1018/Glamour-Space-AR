@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
-[RequireComponent(typeof(ScrollRect))]
 public class ARPlaneMaterialController : MonoBehaviour
 {
     [Header("AR References")]
@@ -10,21 +9,21 @@ public class ARPlaneMaterialController : MonoBehaviour
     [SerializeField] private Material[] planeMaterials;
 
     [Header("UI References")]
+    [SerializeField] private ScrollRect materialsScrollRect;
     [SerializeField] private Scrollbar materialScrollbar;
     [SerializeField] private Button[] materialButtons;
     [SerializeField] private Image[] buttonPreviews;
+    [SerializeField] private Button resetButton;
 
     [Header("Settings")]
     [SerializeField] private float scrollSensitivity = 0.1f;
     [SerializeField] private bool snapToButtons = true;
 
-    private ScrollRect scrollRect;
     private int currentMaterialIndex = 0;
     private bool isDragging = false;
 
     private void Awake()
     {
-        scrollRect = GetComponent<ScrollRect>();
         InitializeReferences();
     }
 
@@ -61,6 +60,11 @@ public class ARPlaneMaterialController : MonoBehaviour
                 materialButtons[i].onClick.AddListener(() => OnMaterialButtonClicked(index));
             }
         }
+
+        if (resetButton != null)
+        {
+            resetButton.onClick.AddListener(ResetAllPlanes);
+        }
     }
 
     private void UpdateButtonPreviews()
@@ -82,7 +86,9 @@ public class ARPlaneMaterialController : MonoBehaviour
 
     private void Update()
     {
-        if (!isDragging && snapToButtons && scrollRect.velocity.magnitude < 200f)
+        if (materialsScrollRect == null) return;
+
+        if (!isDragging && snapToButtons && materialsScrollRect.velocity.magnitude < 200f)
         {
             SnapToNearestButton();
         }
@@ -93,16 +99,18 @@ public class ARPlaneMaterialController : MonoBehaviour
 
     private void SnapToNearestButton()
     {
-        if (materialButtons.Length == 0) return;
-        float normalizedPos = scrollRect.horizontalNormalizedPosition;
+        if (materialButtons.Length == 0 || materialsScrollRect == null) return;
+        float normalizedPos = materialsScrollRect.horizontalNormalizedPosition;
         int closestIndex = Mathf.RoundToInt(normalizedPos * (materialButtons.Length - 1));
         SnapToButton(closestIndex);
     }
 
     private void SnapToButton(int index)
     {
+        if (materialButtons.Length == 0 || materialsScrollRect == null) return;
+
         index = Mathf.Clamp(index, 0, materialButtons.Length - 1);
-        scrollRect.horizontalNormalizedPosition = (float)index / (materialButtons.Length - 1);
+        materialsScrollRect.horizontalNormalizedPosition = (float)index / (materialButtons.Length - 1);
         currentMaterialIndex = index;
         UpdatePlaneMaterial();
     }
@@ -151,5 +159,19 @@ public class ARPlaneMaterialController : MonoBehaviour
     {
         int prevIndex = (currentMaterialIndex - 1 + planeMaterials.Length) % planeMaterials.Length;
         SnapToButton(prevIndex);
+    }
+
+    public void ResetAllPlanes()
+    {
+        if (planeManager == null) return;
+
+        foreach (var plane in planeManager.trackables)
+        {
+            Destroy(plane.gameObject);
+        }
+
+        // Optional: Force plane manager to refresh
+        // planeManager.enabled = false;
+        // planeManager.enabled = true;
     }
 }
