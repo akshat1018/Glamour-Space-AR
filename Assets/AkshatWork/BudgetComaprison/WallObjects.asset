@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e566ba3699d4b364d99531a0a911f0a6, type: 3}
+  m_Name: WallObjects
+  m_EditorClassIdentifier: 
+  objectsList:
+  - objectToPlace: {fileID: 2406716302396832816, guid: 195d39a694ccd43488118e05c88d9cb9, type: 3}
+    objectName: B&W Clock
+    category: Clock
+    price: 1299
+    image: {fileID: 21300000, guid: 7e35fcd637a10e640aa93495c8a378dc, type: 3}
+  - objectToPlace: {fileID: 8116021090746201795, guid: 89d0e34ac698fe843a7f599254375ab1, type: 3}
+    objectName: Wall Clock
+    category: Clock
+    price: 3599
+    image: {fileID: 21300000, guid: 7e35fcd637a10e640aa93495c8a378dc, type: 3}

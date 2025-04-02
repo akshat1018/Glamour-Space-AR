@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b473e81fcb047b442a69e20ecd5980f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.7462735
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b473e81fcb047b442a69e20ecd5980f1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b473e81fcb047b442a69e20ecd5980f1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.5619006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b473e81fcb047b442a69e20ecd5980f1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -50,7 +50,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b473e81fcb047b442a69e20ecd5980f1, type: 3}
       propertyPath: m_Name
-      value: ModernCushionBed
+      value: 11_ModernCushionBed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3840272111657957570, guid: b473e81fcb047b442a69e20ecd5980f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974984522306558807, guid: b473e81fcb047b442a69e20ecd5980f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5050422055867433376, guid: b473e81fcb047b442a69e20ecd5980f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8174907068477135312, guid: b473e81fcb047b442a69e20ecd5980f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

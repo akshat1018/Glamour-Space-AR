@@ -16,45 +16,125 @@ MonoBehaviour:
   - objectToPlace: {fileID: 5274265622294406724, guid: cdec4e033db4fd04eb1a67864d0407b6, type: 3}
     objectName: Dining Table
     category: Table
-    price: 8000
+    price: 7999
     image: {fileID: 21300000, guid: fa0fc6b24df0aac4581a59ca19196dc7, type: 3}
   - objectToPlace: {fileID: 3762300787162620202, guid: cb53ba5066b2d9048bbcd01745763998, type: 3}
     objectName: White Sofa
     category: Sofa
-    price: 23000
+    price: 22999
     image: {fileID: 21300000, guid: 24bb0f62bb725f049be36b6032d88f6d, type: 3}
   - objectToPlace: {fileID: 2606406848853835271, guid: dc1f2bc048dadeb478693b30c01a9ce8, type: 3}
     objectName: Light Brown Sofa
     category: Sofa
-    price: 20000
+    price: 19799
     image: {fileID: 21300000, guid: ef02760c853f49f4f9ca4182b7f2bdd2, type: 3}
   - objectToPlace: {fileID: 2290429128980147679, guid: 35a69f8bd3082ca47bb8aa0d0a31f444, type: 3}
     objectName: Brown Sofa
     category: Sofa
-    price: 20000
+    price: 21000
     image: {fileID: 21300000, guid: 8d543d95485aad54c8caeca94d39edc3, type: 3}
   - objectToPlace: {fileID: 8453616881393536772, guid: 271e50312658545439247ef4bba55365, type: 3}
     objectName: Small White Chair
     category: Chair
-    price: 3000
+    price: 2999
     image: {fileID: 21300000, guid: ad5aa88f0d929274ba8ef296f248e087, type: 3}
   - objectToPlace: {fileID: 4860335814140734793, guid: 550b0e691f0d9db4b8e5e78889d1fa6e, type: 3}
     objectName: Mini Table
     category: Table
-    price: 2000
+    price: 2199
     image: {fileID: 21300000, guid: e0395705ad404244aac275067668f531, type: 3}
   - objectToPlace: {fileID: 1480204124709765691, guid: 8a1dee5a63a665a43acbd66d77801364, type: 3}
     objectName: Simple Lamp
     category: Lamps
-    price: 1200
+    price: 1210
     image: {fileID: 21300000, guid: f0bb9cbd12736cf4699c10a38b3f9f19, type: 3}
   - objectToPlace: {fileID: 3271191973734900374, guid: 66c5af89229203a458702a342ee6e95c, type: 3}
     objectName: Wooden Stool
     category: Stool
-    price: 600
+    price: 649
     image: {fileID: 21300000, guid: 15f1a04312a7c7f4cbd938cc8fac629a, type: 3}
   - objectToPlace: {fileID: 8986767993454023442, guid: 7378e5d7963bfb145af9fc778f74745c, type: 3}
     objectName: Attached Cabinet with furniture
     category: Cabinet
-    price: 45000
+    price: 44499
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 5662348044926719421, guid: cc75a94c37fc9644e8fb811af864dd13, type: 3}
+    objectName: Queen Size Bed
+    category: Bed
+    price: 25999
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 7574498962901583347, guid: b2b9e3d8e3b224a4491b043100e1a59a, type: 3}
+    objectName: Murphy Bed
+    category: Bed
+    price: 28499
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 1165143813988818172, guid: c7fff2604f736d145b6b1fc17276d655, type: 3}
+    objectName: Modern Cushion Bed
+    category: Bed
+    price: 30999
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 4991789460834482783, guid: 5a80a1c1ea0811e4c98fb2feb6c286f6, type: 3}
+    objectName: Single Bed
+    category: Bed
+    price: 14999
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 8370593745204612759, guid: 9fd4915c16673be49b4708fab134867b, type: 3}
+    objectName: Cabinet
+    category: Cabinet
+    price: 15999
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 179292824852211417, guid: 2394241c1ad986d4ea4fa6d00f1c31fc, type: 3}
+    objectName: Wardrobe
+    category: Cabinet
+    price: 10499
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 2978483718876589575, guid: 4bc69ae28cc516e409fe1fd5603a1583, type: 3}
+    objectName: Bend Lamp
+    category: Lamp
+    price: 1500
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 7660440630884298478, guid: 026220e4e7ecdb8469716bbb33df0819, type: 3}
+    objectName: Minimalistic Clock
+    category: Clock
+    price: 349
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 8116021090746201795, guid: 89d0e34ac698fe843a7f599254375ab1, type: 3}
+    objectName: Table Clock
+    category: Clock
+    price: 2500
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 7474982730186552446, guid: 473a42f0343b9d3499545eba06bb78dd, type: 3}
+    objectName: Bean Bag Sofa
+    category: Sofa
+    price: 9999
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 2873988345206355242, guid: 63dbb323c98cab846bf4c5345ad4a73f, type: 3}
+    objectName: Office Chair
+    category: Chair
+    price: 3000
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 1489516247392124150, guid: 3dd9bd2ba45ef694cb2fcb06cbef6bb3, type: 3}
+    objectName: Gaming Chair
+    category: Chair
+    price: 7700
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 6824858321593009642, guid: 7b8bcc0d6b596f040992f524cc0f4b4b, type: 3}
+    objectName: Japanese Chair
+    category: Chair
+    price: 899
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 4993753860692332790, guid: 7bd0b537421b5a34ba40ff478c290cd9, type: 3}
+    objectName: Office Chair 2
+    category: Chair
+    price: 2499
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 2997817886452729392, guid: 89adecc37c9e1dd42b4cab20b8b9bfc3, type: 3}
+    objectName: Coffee Table
+    category: Table
+    price: 8500
+    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+  - objectToPlace: {fileID: 5807926821716091220, guid: a7a96fb2fde1d134c85529960459943c, type: 3}
+    objectName: School Bench
+    category: Table
+    price: 2999
     image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
