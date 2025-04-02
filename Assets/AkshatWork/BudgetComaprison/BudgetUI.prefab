@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 7627561901610279033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1369363709206801668}
@@ -106,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 855872243250120339, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 20862.86
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 874367576588594396, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -221,6 +221,10 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1731957845836052148, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1731957845836052148, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_Colors.m_NormalColor.b
       value: 0.8283019
       objectReference: {fileID: 0}
@@ -285,6 +289,10 @@ PrefabInstance:
       value: Enter Budget...
       objectReference: {fileID: 0}
     - target: {fileID: 4583277140191360554, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583277140191360554, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: f81f7e2b2cf1b6f4f894f083e4de9522, type: 2}
@@ -299,6 +307,10 @@ PrefabInstance:
     - target: {fileID: 4583277140191360554, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602962657393785938, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
+      propertyPath: m_text
+      value: "\u200B"
       objectReference: {fileID: 0}
     - target: {fileID: 4602962657393785938, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_VerticalAlignment
@@ -478,11 +490,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7906627736452939802, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_Size
-      value: 0.8816671
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7906627736452939802, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8041774508471494786, guid: 354f926e6792a0842894fc504c8431d9, type: 3}
       propertyPath: m_SizeDelta.x
