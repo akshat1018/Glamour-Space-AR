@@ -117,7 +117,7 @@ MonoBehaviour:
     objectName: Gaming Chair
     category: Chair
     price: 7700
-    image: {fileID: 21300000, guid: 265d3037429817e4888370da566f30c9, type: 3}
+    image: {fileID: 21300000, guid: 54fb6c2e351e960469d082cbda532263, type: 3}
   - objectToPlace: {fileID: 6824858321593009642, guid: 7b8bcc0d6b596f040992f524cc0f4b4b, type: 3}
     objectName: Japanese Chair
     category: Chair

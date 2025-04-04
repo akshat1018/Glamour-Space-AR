@@ -17,9 +17,9 @@ MonoBehaviour:
     objectName: B&W Clock
     category: Clock
     price: 1299
-    image: {fileID: 21300000, guid: 7e35fcd637a10e640aa93495c8a378dc, type: 3}
+    image: {fileID: 21300000, guid: 2c1281c7bce37974481baa8a8976cd64, type: 3}
   - objectToPlace: {fileID: 8116021090746201795, guid: 89d0e34ac698fe843a7f599254375ab1, type: 3}
     objectName: Wall Clock
     category: Clock
     price: 3599
-    image: {fileID: 21300000, guid: 7e35fcd637a10e640aa93495c8a378dc, type: 3}
+    image: {fileID: 21300000, guid: 927260e622a4f9e408511ca3fcf0d41b, type: 3}
