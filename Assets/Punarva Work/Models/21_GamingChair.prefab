@@ -50,10 +50,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 437bac1a55c7e444ea7912937a8fd6c8, type: 3}
       propertyPath: m_Name
-      value: GamingChair
+      value: 21_GamingChair
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 437bac1a55c7e444ea7912937a8fd6c8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8457847874512546996}
   m_SourcePrefab: {fileID: 100100000, guid: 437bac1a55c7e444ea7912937a8fd6c8, type: 3}
+--- !u!1 &1489516247392124150 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 437bac1a55c7e444ea7912937a8fd6c8, type: 3}
+  m_PrefabInstance: {fileID: 1759424159310922151}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &8457847874512546996
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489516247392124150}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 5.3, z: 2.5}
+  m_Center: {x: 0.2, y: 2.64, z: -1.18}
